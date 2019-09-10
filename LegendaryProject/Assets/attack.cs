@@ -44,14 +44,13 @@ public class attack : MonoBehaviour {
         RaycastHit hitinfo ;
         if (Physics.Raycast(origin,direction,out hitinfo,MaxDistance,layerMask, QueryTriggerInteraction.UseGlobal))
         {
-            hitinfo.collider.GetComponent<Renderer>().material.color = HitColor;
-            DealRandomDamage(2, 4,hitinfo);
+            DealRandomDamage(10, 40,hitinfo);
         }
     }
 
     private void DealRandomDamage(int lowStat,int highStat, RaycastHit hitinfo)
     {
         System.Random rnd = new System.Random();
-        hitinfo.collider.gameObject.GetComponent<Dying>().TakeDamage(rnd.Next(lowStat, highStat+1));
+        hitinfo.collider.gameObject.GetComponent<Health>().TakeDamage(rnd.Next(lowStat, highStat+1));
     }
 }

@@ -32,4 +32,9 @@ public class Health : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space))
             ModifiyHealth(-10);
     }
+
+    public void TakeDamage(int damage)
+    {
+        ModifiyHealth(-damage);
+    }
 }
