@@ -10,6 +10,7 @@ public class attack : MonoBehaviour {
     private float MaxDistance = 10f;
     private bool axisInUse = false;
     private Animator animator;
+    private const int DAMAGE = 1;
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
@@ -24,9 +25,7 @@ public class attack : MonoBehaviour {
             {
                 axisInUse = true;
                 animator.SetTrigger("Attacking");
-                Component Sword = gameObject.transform.GetChild(1);
-                Sword.transform.rotation = new Quaternion(Sword.transform.rotation.x + 1f, Sword.transform.rotation.y, Sword.transform.rotation.z, Sword.transform.rotation.w);
-                RaycastSingle();
+                RaycastSingle();               
             }
         }
         if (Input.GetAxis("Fire1") == 0)
@@ -46,6 +45,13 @@ public class attack : MonoBehaviour {
         if (Physics.Raycast(origin,direction,out hitinfo,MaxDistance,layerMask, QueryTriggerInteraction.UseGlobal))
         {
             hitinfo.collider.GetComponent<Renderer>().material.color = HitColor;
+            DealRandomDamage(2, 4,hitinfo);
         }
+    }
+
+    private void DealRandomDamage(int lowStat,int highStat, RaycastHit hitinfo)
+    {
+        System.Random rnd = new System.Random();
+        hitinfo.collider.gameObject.GetComponent<Dying>().TakeDamage(rnd.Next(lowStat, highStat+1));
     }
 }
