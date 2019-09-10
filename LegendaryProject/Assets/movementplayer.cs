@@ -13,7 +13,14 @@ public class movementplayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        //if(Input.GetAxis("Mouse X") != 0)
+        //{
+        //    print(Input.GetAxis("Mouse X"));
+        //}
+        //if (Input.GetAxis("Mouse Y") != 0)
+        //{
+        //    print(Input.GetAxis("Mouse Y"));
+        //}
         processMovementInput();
 
     }

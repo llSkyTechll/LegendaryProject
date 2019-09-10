@@ -25,6 +25,7 @@ public class Health : MonoBehaviour {
         if (currentHealth <= 0)
         {
             animator.SetTrigger("Death");
+            Destroy(gameObject,10);
         }
     }
 

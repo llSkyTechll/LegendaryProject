@@ -5,12 +5,9 @@ using UnityEngine;
 
 public class attack : MonoBehaviour {
     [SerializeField]
-    private Color HitColor = Color.red;
-    [SerializeField]
     private float MaxDistance = 10f;
     private bool axisInUse = false;
     private Animator animator;
-    private const int DAMAGE = 1;
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
@@ -44,22 +41,13 @@ public class attack : MonoBehaviour {
         RaycastHit hitinfo ;
         if (Physics.Raycast(origin,direction,out hitinfo,MaxDistance,layerMask, QueryTriggerInteraction.UseGlobal))
         {
-<<<<<<< HEAD
             DealRandomDamage(10, 40,hitinfo);
-=======
-            hitinfo.collider.GetComponent<Renderer>().material.color = HitColor;
-            DealRandomDamage(2, 4,hitinfo);
->>>>>>> fd5592765cb417baebf3d60a08bf2058ce643564
         }
     }
 
     private void DealRandomDamage(int lowStat,int highStat, RaycastHit hitinfo)
     {
         System.Random rnd = new System.Random();
-<<<<<<< HEAD
         hitinfo.collider.gameObject.GetComponent<Health>().TakeDamage(rnd.Next(lowStat, highStat+1));
-=======
-        hitinfo.collider.gameObject.GetComponent<Dying>().TakeDamage(rnd.Next(lowStat, highStat+1));
->>>>>>> fd5592765cb417baebf3d60a08bf2058ce643564
     }
 }
