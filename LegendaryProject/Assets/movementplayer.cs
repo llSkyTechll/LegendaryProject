@@ -8,7 +8,6 @@ public class movementplayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         characterControleur = GetComponent<CharacterController>();
-
 	}
 	
 	// Update is called once per frame
