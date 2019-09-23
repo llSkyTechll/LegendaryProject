@@ -24,16 +24,15 @@ public class GhostTiger : Enemy {
 	void Update () {
         if (health.currentHealth > 0)
         {
-            FollowPlayer();
+            //FollowPlayer();
         }
     }
 
-    private void FollowPlayer()
-    {
-        animator.SetBool("Run",true);
-        rbd.MovePosition(Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime));
-    }
-
+    //private void FollowPlayer()
+    //{
+    //    animator.Play("Run");
+    //    rbd.MovePosition(Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime));
+    //}
     public override void Die()
     {
         animator.SetTrigger("Death");
