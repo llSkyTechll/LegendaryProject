@@ -2327,7 +2327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e09612655008664b8d5ce5ecc85b932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitColor: {r: 1, g: 0, b: 0, a: 1}
   MaxDistance: 2
 --- !u!143 &143218776687940118
 CharacterController:
