@@ -14,7 +14,7 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(GameObject entity, int damage)
     {
         currentHealth -= damage;
 
@@ -23,7 +23,8 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            GetComponent<Enemy>().Die();
+            print(GetComponent<Enemy>());
+            entity.Die();
         }
     }
 }

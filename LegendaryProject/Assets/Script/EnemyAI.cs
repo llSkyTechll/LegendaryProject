@@ -3,36 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour {
+public class EnemyAI : GhostTiger {
 
     public float lookRadius = 10f;
 
     Transform target;
-    public NavMeshAgent agent;
+    NavMeshAgent agent;
     Rigidbody rbd;
     Animator animator;
+    GameObject player;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+        agent = GetComponent<NavMeshAgent>();
         target = PlayerManager.instance.player.transform;
-        //animator.Play("Run");
-	}
+        animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
+        player = PlayerManager.instance.player;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        float distance = Vector3.Distance(target.position, transform.position);
 
-        if (distance <= lookRadius)
+        if (health.currentHealth <= 0)
         {
-            agent.SetDestination(target.position);
+            animator.Play("Dead");
+        }
+        else
+        {
+            float distance = Vector3.Distance(target.position, transform.position);
 
+            if (distance <= lookRadius && distance >= agent.stoppingDistance)
+            {
+                agent.SetDestination(target.position);
+                animator.Play("Run"); 
+            }
             if (distance <= agent.stoppingDistance)
             {
-                
+                animator.Play("Skill2");
+                player.GetComponent<Health>().TakeDamage(10);
                 FaceTarget();
             }
         }
-	}
+    }
 
     void FaceTarget()
     {

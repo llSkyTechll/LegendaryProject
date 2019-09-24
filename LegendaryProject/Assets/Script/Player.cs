@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostTiger : Enemy {
+public class Player : Enemy {
     GameObject player;
     public float speed = 1;
     Rigidbody rbd;
     AudioSource audioSource;
     private Animator animator;
-    //public AudioMusic audioMusic;
-
     // Use this for initialization
     void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
         player = GameObject.FindGameObjectWithTag("Player");
         rbd = GetComponent<Rigidbody>();
         //audioSource = GameObject.FindGameObjectWithTag("SoundPlayer").GetComponent<AudioSource>();
@@ -19,28 +22,16 @@ public class GhostTiger : Enemy {
         health = GetComponent<Health>();
         animator = GetComponent<Animator>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (health.currentHealth > 0)
-        {
-            //FollowPlayer();
-        }
-    }
 
-    //private void FollowPlayer()
-    //{
-    //    animator.Play("Run");
-    //    rbd.MovePosition(Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime));
-    //}
     public override void Die()
     {
-        animator.SetTrigger("Death");
+        //animator.SetTrigger("Death");
+        print("die");
         Destroy(gameObject, 10);
     }
 
     public override void OnDamage(int damage)
     {
-        health.TakeDamage(gameObject,damage);
+        health.TakeDamage(damage);
     }
 }
