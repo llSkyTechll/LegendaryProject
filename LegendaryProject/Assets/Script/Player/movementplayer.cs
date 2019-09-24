@@ -3,23 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class movementplayer : MonoBehaviour {
-    private CharacterController characterControleur;
+    private CharacterController characterController;
     private Rigidbody rdb;
     private float currentX = 0.0f;
     private float momentum = 0.0f;
+    private Animator animator;
+    private float sensivity;
     // Use this for initialization
     void Start () {
-        characterControleur = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
         rdb = GetComponent<Rigidbody>();
-	}
+        animator = GetComponentInChildren<Animator>();
+        sensivity = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().sensivityX;
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetAxis("Jump") != 0)
         {
-            momentum = 10;
+            
+            if (characterController.isGrounded)
+            {
+                momentum = 3;
+                animator.Play("Jump");
+            }
+            
         }
-        currentX += Input.GetAxis("Mouse X");
+        currentX += Input.GetAxis("Mouse X")*sensivity;
         processMovementInput();
       
     }
@@ -30,15 +40,20 @@ public class movementplayer : MonoBehaviour {
         if (momentum > 0)
         {
             transform.Translate(0, momentum/10, 0);
-            momentum--;
+            momentum-= Time.deltaTime*9.8f;
         }
         Vector3 movement = new Vector3(horizontal,0,vertical);
         Vector3 ajustedMovement = transform.TransformDirection(movement);
-        characterControleur.SimpleMove(ajustedMovement * Time.deltaTime * 500);
+        characterController.SimpleMove(ajustedMovement * Time.deltaTime * 500);
         if (ajustedMovement!= new Vector3())
         {
+            animator.SetBool("Walking", true);
             Quaternion rotation = Quaternion.Euler(0, currentX, 0);
             transform.rotation = rotation;
+        }
+        else
+        {
+            animator.SetBool("Walking", false);
         }
     }
 }

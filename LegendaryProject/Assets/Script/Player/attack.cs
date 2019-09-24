@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class attack : MonoBehaviour {
     [SerializeField]
-    private float MaxDistance = 10f;
+    private float MaxDistance = 2f;
     private bool axisInUse = false;
     private Animator animator;
 	// Use this for initialization
 	void Start () {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 	
 	// Update is called once per frame
