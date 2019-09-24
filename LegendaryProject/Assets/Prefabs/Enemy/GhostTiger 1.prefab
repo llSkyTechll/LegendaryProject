@@ -1478,6 +1478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 10
+  agent: {fileID: 0}
 --- !u!137 &137587906874493790
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

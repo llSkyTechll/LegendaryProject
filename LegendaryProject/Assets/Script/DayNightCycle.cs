@@ -12,11 +12,17 @@ public class DayNightCycle : MonoBehaviour
     float sunInitialIntensify;
     public float startIntensitymultiplier = 0.35f;
     public float vitesseLeverCoucherSoleil = 4f;
+    private GameObject cam;
+    private Skybox sky;
+    public Material day;
+    public Material night;
     // Use this for initialization
     void Start()
     {
         sunInitialIntensify = sun.intensity;
-
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
+        sky = cam.GetComponent<Skybox>();
+        
     }
 
     // Update is called once per frame
@@ -34,9 +40,11 @@ public class DayNightCycle : MonoBehaviour
     {
         sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * 180f), 0, 0);
         float intensityMultiplier = 1;
+        sky.material = day;
 
         if (currentTimeOfDay <= 0.15f || currentTimeOfDay >= 0.85F)
         {
+            sky.material = night;
             intensityMultiplier = startIntensitymultiplier;
         }
         else if (currentTimeOfDay <= 0.30f)
@@ -49,7 +57,6 @@ public class DayNightCycle : MonoBehaviour
         }
         else if (currentTimeOfDay >= 0.70f)
         {
-
             intensityMultiplier = 1 - (Mathf.Clamp01(currentTimeOfDay - 0.69f) * vitesseLeverCoucherSoleil);
             if (intensityMultiplier <= startIntensitymultiplier)
             {

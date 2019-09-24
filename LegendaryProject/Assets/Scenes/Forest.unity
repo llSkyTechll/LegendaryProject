@@ -409,6 +409,16 @@ Prefab:
       propertyPath: sun
       value: 
       objectReference: {fileID: 874148220}
+    - target: {fileID: 114297147706602180, guid: e1c556649d67308499063ac157d53783,
+        type: 2}
+      propertyPath: day
+      value: 
+      objectReference: {fileID: 2100000, guid: 16e5797f94893404c9e7d59306ad6eb6, type: 2}
+    - target: {fileID: 114297147706602180, guid: e1c556649d67308499063ac157d53783,
+        type: 2}
+      propertyPath: night
+      value: 
+      objectReference: {fileID: 2100000, guid: c2f79661693d5c1448297bd95bc5827f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1c556649d67308499063ac157d53783, type: 2}
   m_IsPrefabAsset: 0
@@ -422,6 +432,7 @@ GameObject:
   - component: {fileID: 1313291458}
   - component: {fileID: 1313291457}
   - component: {fileID: 1313291456}
+  - component: {fileID: 1313291459}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -489,3 +500,11 @@ Transform:
   m_Father: {fileID: 291797073}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 30.046001, y: -163.466, z: 3.219}
+--- !u!45 &1313291459
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1313291455}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 16e5797f94893404c9e7d59306ad6eb6, type: 2}
