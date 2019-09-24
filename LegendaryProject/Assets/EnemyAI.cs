@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         target = PlayerManager.instance.player.transform;
-        animator.Play("Run");
+        //animator.Play("Run");
 	}
 	
 	// Update is called once per frame
