@@ -19,16 +19,19 @@ public class movementplayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (characterController.isGrounded)
+        {
+            momentum = 0;
+        }
         if (Input.GetAxis("Jump") != 0)
         {
-            
             if (characterController.isGrounded)
             {
                 momentum = 3;
                 animator.Play("Jump");
             }
-            
         }
+        
         currentX += Input.GetAxis("Mouse X")*sensivity;
         processMovementInput();
       
@@ -39,7 +42,7 @@ public class movementplayer : MonoBehaviour {
         var vertical = Input.GetAxis("Vertical");
         if (momentum > 0)
         {
-            transform.Translate(0, momentum/10, 0);
+            transform.Translate(0, momentum/9.8f, 0);
             momentum-= Time.deltaTime*9.8f;
         }
         Vector3 movement = new Vector3(horizontal,0,vertical);
