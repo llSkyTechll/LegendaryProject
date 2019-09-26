@@ -13,11 +13,11 @@ public class MouvementCamera : MonoBehaviour {
     private const float Y_ANGLE_MAX = 50.0f;
 
 
-    private float distance = 10.0f;
+    private float distance = 5.0f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
-    private float sensivityX = 10.0f;
-    private float sensivityY = 10.0f;
+    public float sensivityX = 10.0f;
+    private float sensivityY = 4.0f;
 
     private void Start()
     {
@@ -28,8 +28,8 @@ public class MouvementCamera : MonoBehaviour {
 
     private void Update()
     {
-        currentX += Input.GetAxis("Mouse X");
-        currentY += Input.GetAxis("Mouse Y");
+        currentX += Input.GetAxis("Mouse X")*sensivityX;
+        currentY -= Input.GetAxis("Mouse Y")*sensivityY; // pouvoir modifier avec les options plus tard += ou -=
 
         currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
     }

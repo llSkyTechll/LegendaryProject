@@ -5,19 +5,21 @@ using UnityEngine;
 
 public class attack : MonoBehaviour {
     [SerializeField]
-    private float MaxDistance = 10f;
+    private float MaxDistance = 2f;
     private bool axisInUse = false;
     private Animator animator;
-	// Use this for initialization
-	void Start () {
-        animator = GetComponent<Animator>();
+    private CharacterController characterController;
+    // Use this for initialization
+    void Start () {
+        animator = GetComponentInChildren<Animator>();
+        characterController = GetComponent<CharacterController>();
     }
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetAxis("Fire1")!=0)
         {
-            if (axisInUse == false)
+            if (axisInUse == false && characterController.isGrounded)
             {
                 axisInUse = true;
                 animator.SetTrigger("Attacking");
