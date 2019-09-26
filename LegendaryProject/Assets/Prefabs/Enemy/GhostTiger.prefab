@@ -681,7 +681,7 @@ GameObject:
   - component: {fileID: 114629674227471808}
   - component: {fileID: 114913177148577276}
   m_Layer: 9
-  m_Name: GhostTiger 1
+  m_Name: GhostTiger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1477,6 +1477,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9847d8f967e5b438994f280e50c07b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTotal: 1
+  speed: 1
   lookRadius: 10
 --- !u!137 &137587906874493790
 SkinnedMeshRenderer:
