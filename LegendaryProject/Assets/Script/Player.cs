@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Enemy {
+public class Player : Character {
     GameObject player;
     public float speed = 1;
     Rigidbody rbd;
@@ -22,8 +22,7 @@ public class Player : Enemy {
     void Update () {
         if (health.currentHealth <= 0)
         {
-            //animator.Play("Dead");
-            gameObject.GetComponent<Enemy>().Die();
+            gameObject.GetComponent<Character>().Die();
         }
     }
 

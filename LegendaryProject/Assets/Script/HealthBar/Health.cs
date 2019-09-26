@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            //GetComponent<Enemy>().Die();
+            GetComponent<Character>().Die();
         }
     }
 }

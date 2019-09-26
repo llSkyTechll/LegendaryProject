@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostTiger : Enemy {
+public class GhostTiger : Character {
     protected GameObject player;
     public float speed = 1;
     protected Rigidbody rbd;

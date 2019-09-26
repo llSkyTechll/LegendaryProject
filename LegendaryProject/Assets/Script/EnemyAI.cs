@@ -5,13 +5,10 @@ using UnityEngine.AI;
 
 public class EnemyAI : GhostTiger {
 
-    public float lookRadius = 10f;
+    public float lookRadius = 25f;
 
     Transform target;
     NavMeshAgent agent;
-    Rigidbody rbd;
-    Animator animator;
-    GameObject player;
 
     private float attackSpeed = 1f;
     private float attackCooldown = 0f;
@@ -31,7 +28,7 @@ public class EnemyAI : GhostTiger {
         if (health.currentHealth <= 0)
         {
             animator.Play("Dead");
-            gameObject.GetComponent<Enemy>().Die();
+            gameObject.GetComponent<Character>().Die();
         }
         else
         {

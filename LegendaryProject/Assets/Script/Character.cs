@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Enemy : MonoBehaviour, Damageable
+public abstract class Character : MonoBehaviour, Damageable
 {
     protected Health health;
     public int lifeTotal = 1;
