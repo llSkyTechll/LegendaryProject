@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GhostTiger : Enemy {
-    GameObject player;
+    protected GameObject player;
     public float speed = 1;
-    Rigidbody rbd;
+    protected Rigidbody rbd;
     AudioSource audioSource;
-    private Animator animator;
+    protected Animator animator;
     //public AudioMusic audioMusic;
 
     // Use this for initialization
@@ -22,10 +22,7 @@ public class GhostTiger : Enemy {
 	
 	// Update is called once per frame
 	void Update () {
-        if (health.currentHealth > 0)
-        {
-            //FollowPlayer();
-        }
+       
     }
 
     //private void FollowPlayer()
@@ -41,6 +38,6 @@ public class GhostTiger : Enemy {
 
     public override void OnDamage(int damage)
     {
-        health.TakeDamage(gameObject,damage);
+        health.TakeDamage(damage);
     }
 }

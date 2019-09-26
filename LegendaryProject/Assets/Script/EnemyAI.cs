@@ -13,6 +13,9 @@ public class EnemyAI : GhostTiger {
     Animator animator;
     GameObject player;
 
+    private float attackSpeed = 1f;
+    private float attackCooldown = 0f;
+
     // Use this for initialization
     void Start () {
         agent = GetComponent<NavMeshAgent>();
@@ -24,10 +27,11 @@ public class EnemyAI : GhostTiger {
 	
 	// Update is called once per frame
 	void Update () {
-
+        attackCooldown -= Time.deltaTime;
         if (health.currentHealth <= 0)
         {
             animator.Play("Dead");
+            gameObject.GetComponent<Enemy>().Die();
         }
         else
         {
@@ -40,8 +44,12 @@ public class EnemyAI : GhostTiger {
             }
             if (distance <= agent.stoppingDistance)
             {
-                animator.Play("Skill2");
-                player.GetComponent<Health>().TakeDamage(10);
+                if (attackCooldown <= 0f)
+                {
+                    animator.Play("Skill2");
+                    player.GetComponent<Health>().TakeDamage(10);
+                    attackCooldown = 2f / attackSpeed;                    
+                }
                 FaceTarget();
             }
         }

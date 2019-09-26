@@ -10,11 +10,6 @@ public class Player : Enemy {
     private Animator animator;
     // Use this for initialization
     void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
         player = GameObject.FindGameObjectWithTag("Player");
         rbd = GetComponent<Rigidbody>();
         //audioSource = GameObject.FindGameObjectWithTag("SoundPlayer").GetComponent<AudioSource>();
@@ -23,11 +18,19 @@ public class Player : Enemy {
         animator = GetComponent<Animator>();
     }
 
+    // Update is called once per frame
+    void Update () {
+        if (health.currentHealth <= 0)
+        {
+            //animator.Play("Dead");
+            gameObject.GetComponent<Enemy>().Die();
+        }
+    }
+
     public override void Die()
     {
         //animator.SetTrigger("Death");
-        print("die");
-        Destroy(gameObject, 10);
+        Destroy(gameObject);
     }
 
     public override void OnDamage(int damage)
