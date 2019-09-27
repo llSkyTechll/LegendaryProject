@@ -37,17 +37,21 @@ public class EnemyAI : GhostTiger {
             if (distance <= lookRadius && distance >= agent.stoppingDistance)
             {
                 agent.SetDestination(target.position);
-                animator.Play("Run"); 
-            }
-            if (distance <= agent.stoppingDistance)
-            {
-                if (attackCooldown <= 0f)
+                animator.Play("Run");
+                if (distance <= agent.stoppingDistance)
                 {
-                    animator.Play("Skill2");
-                    player.GetComponent<Health>().TakeDamage(10);
-                    attackCooldown = 2f / attackSpeed;                    
+                    if (attackCooldown <= 0f)
+                    {
+                        animator.Play("Skill2");
+                        player.GetComponent<Health>().TakeDamage(10);
+                        attackCooldown = 2f / attackSpeed;
+                    }
+                    FaceTarget();
                 }
-                FaceTarget();
+            }
+            else
+            {
+                animator.Play("Idle");
             }
         }
     }
