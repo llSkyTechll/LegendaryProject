@@ -245,6 +245,7 @@ GameObject:
   - component: {fileID: 232502413}
   - component: {fileID: 232502412}
   - component: {fileID: 232502415}
+  - component: {fileID: 232502416}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -326,6 +327,14 @@ MonoBehaviour:
   lookAt: {fileID: 326451468}
   camTransform: {fileID: 0}
   sensivityX: 10
+--- !u!45 &232502416
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 232502411}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 16e5797f94893404c9e7d59306ad6eb6, type: 2}
 --- !u!1 &326451462 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1265454134238778, guid: 8ba25334269d09e4caa588d9d4f384f5,
@@ -663,6 +672,16 @@ Prefab:
       propertyPath: startIntensitymultiplier
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114297147706602180, guid: e1c556649d67308499063ac157d53783,
+        type: 2}
+      propertyPath: day
+      value: 
+      objectReference: {fileID: 2100000, guid: 16e5797f94893404c9e7d59306ad6eb6, type: 2}
+    - target: {fileID: 114297147706602180, guid: e1c556649d67308499063ac157d53783,
+        type: 2}
+      propertyPath: night
+      value: 
+      objectReference: {fileID: 2100000, guid: c2f79661693d5c1448297bd95bc5827f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1c556649d67308499063ac157d53783, type: 2}
   m_IsPrefabAsset: 0
