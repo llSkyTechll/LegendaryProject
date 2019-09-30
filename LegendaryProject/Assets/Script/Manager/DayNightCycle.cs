@@ -12,10 +12,18 @@ public class DayNightCycle : MonoBehaviour
     float sunInitialIntensify;
     public float startIntensitymultiplier = 0.35f;
     public float vitesseLeverCoucherSoleil = 4f;
+    private GameObject cam;
+    private Skybox sky;
+    public Material day;
+    public Material night;
+    public float dayStart = 0.15f;
+    public float dayEnd = 0.85f;
     // Use this for initialization
     void Start()
     {
         sunInitialIntensify = sun.intensity;
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
+        sky = cam.GetComponent<Skybox>();
 
     }
 
@@ -24,20 +32,30 @@ public class DayNightCycle : MonoBehaviour
     {
         UpdateSun();
 
+        UpdateTimeOfDay();
+    }
+
+    void UpdateTimeOfDay()
+    {
         currentTimeOfDay += (Time.deltaTime / secondsInFullDay) * timeMultiplier;
         if (currentTimeOfDay >= 1)
         {
             currentTimeOfDay = 0;
         }
     }
+
     void UpdateSun()
     {
-        sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * 180f), 0, 0);
+        sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * 180f)-1, 0, 0);
         float intensityMultiplier = 1;
+        sun.shadowStrength = 0.5f;
+        sky.material = day;
 
-        if (currentTimeOfDay <= 0.15f || currentTimeOfDay >= 0.85F)
+        if (currentTimeOfDay <= dayStart || currentTimeOfDay >= dayEnd)
         {
+            sky.material = night;
             intensityMultiplier = startIntensitymultiplier;
+
         }
         else if (currentTimeOfDay <= 0.30f)
         {
@@ -49,7 +67,6 @@ public class DayNightCycle : MonoBehaviour
         }
         else if (currentTimeOfDay >= 0.70f)
         {
-
             intensityMultiplier = 1 - (Mathf.Clamp01(currentTimeOfDay - 0.69f) * vitesseLeverCoucherSoleil);
             if (intensityMultiplier <= startIntensitymultiplier)
             {
@@ -58,19 +75,17 @@ public class DayNightCycle : MonoBehaviour
         }
         sun.intensity = sunInitialIntensify * intensityMultiplier;
         setShadowOff(intensityMultiplier);
-
     }
+
     void setShadowOff(float inIntensityMultiplier)
     {
         if (inIntensityMultiplier == startIntensitymultiplier)
         {
             sun.shadowStrength = 0;
-
         }
         else
         {
-            sun.shadowStrength = 0.5f;
-
+            sun.shadowStrength = inIntensityMultiplier / 4;
         }
     }
 
