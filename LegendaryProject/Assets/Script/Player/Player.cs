@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Character {
-    GameObject player;
+    //GameObject player;
     public float speed = 1;
-    Rigidbody rbd;
-    AudioSource audioSource;
-    private Animator animator;
+    //Rigidbody rbd;
+    //AudioSource audioSource;
+    //private Animator animator;
     // Use this for initialization
     void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
-        rbd = GetComponent<Rigidbody>();
+        //player = GameObject.FindGameObjectWithTag("Player");
+        //rbd = GetComponent<Rigidbody>();
         //audioSource = GameObject.FindGameObjectWithTag("SoundPlayer").GetComponent<AudioSource>();
         SetLife(100);
         health = GetComponent<Health>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame

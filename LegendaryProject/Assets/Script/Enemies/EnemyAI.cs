@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : GhostTiger {
+public class EnemyAI : GhostTiger
+{
 
     public float lookRadius = 25f;
 
@@ -14,16 +15,18 @@ public class EnemyAI : GhostTiger {
     private float attackCooldown = 0f;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         agent = GetComponent<NavMeshAgent>();
         target = PlayerManager.instance.player.transform;
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
         player = PlayerManager.instance.player;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         attackCooldown -= Time.deltaTime;
         if (health.currentHealth <= 0)
         {
@@ -34,22 +37,27 @@ public class EnemyAI : GhostTiger {
         {
             float distance = Vector3.Distance(target.position, transform.position);
 
-            if (distance <= lookRadius && distance >= agent.stoppingDistance)
+            if (distance <= lookRadius && distance > agent.stoppingDistance)
             {
                 agent.SetDestination(target.position);
-                animator.Play("Run");
-                if (distance <= agent.stoppingDistance)
+                if (attackCooldown <= 0f && agent.velocity.magnitude / agent.speed != 0)
                 {
-                    if (attackCooldown <= 0f)
-                    {
-                        animator.Play("Skill2");
-                        player.GetComponent<Health>().TakeDamage(10);
-                        attackCooldown = 2f / attackSpeed;
-                    }
-                    FaceTarget();
+                   animator.Play("Run");
                 }
+                
+                FaceTarget();
             }
-            else
+            else if (distance <= agent.stoppingDistance)
+            {
+                if (attackCooldown <= 0f)
+                {
+                    animator.Play("Skill2");
+                    player.GetComponent<Health>().TakeDamage(10);
+                    attackCooldown = 2f / attackSpeed;
+                }
+                FaceTarget();
+            }
+            else if (distance > lookRadius && (agent.velocity.magnitude / agent.speed) == 0)
             {
                 animator.Play("Idle");
             }
