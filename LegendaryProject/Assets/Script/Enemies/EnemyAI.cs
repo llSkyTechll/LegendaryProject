@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : GhostTiger
+public class EnemyAI : Character
 {
 
     public float lookRadius = 25f;
@@ -14,6 +14,8 @@ public class EnemyAI : GhostTiger
     private float attackSpeed = 1f;
     private float attackCooldown = 0f;
 
+    protected GameObject player;
+    protected Animator animator;
     // Use this for initialization
     void Start()
     {
@@ -27,6 +29,7 @@ public class EnemyAI : GhostTiger
     // Update is called once per frame
     void Update()
     {
+        Footsteps();
         attackCooldown -= Time.deltaTime;
         if (health.currentHealth <= 0)
         {
@@ -75,5 +78,27 @@ public class EnemyAI : GhostTiger
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    public override void Die()
+    {
+        animator.SetTrigger("Death");
+        Destroy(gameObject, 10);
+    }
+
+    public override void OnDamage(int damage)
+    {
+        health.TakeDamage(damage);
+    }
+
+    public override void Footsteps()
+    {
+        print(agent.velocity.magnitude);
+        if (agent.velocity.magnitude > 2f && GetComponent<AudioSource>().isPlaying == false)
+        {
+            GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1);
+            GetComponent<AudioSource>().volume = Random.Range(0.8f, 1.1f);
+            GetComponent<AudioSource>().Play();
+        }
     }
 }

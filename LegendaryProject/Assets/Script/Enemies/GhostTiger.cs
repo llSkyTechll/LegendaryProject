@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostTiger : Character {
-    protected GameObject player;
+public class GhostTiger : EnemyAI {
     public float speed = 1;
     protected Rigidbody rbd;
     AudioSource audioSource;
-    protected Animator animator;
     //public AudioMusic audioMusic;
 
     // Use this for initialization
@@ -22,7 +20,7 @@ public class GhostTiger : Character {
 	
 	// Update is called once per frame
 	void Update () {
-       
+        
     }
 
     //private void FollowPlayer()
@@ -30,14 +28,4 @@ public class GhostTiger : Character {
     //    animator.Play("Run");
     //    rbd.MovePosition(Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime));
     //}
-    public override void Die()
-    {
-        animator.SetTrigger("Death");
-        Destroy(gameObject, 10);
-    }
-
-    public override void OnDamage(int damage)
-    {
-        health.TakeDamage(damage);
-    }
 }

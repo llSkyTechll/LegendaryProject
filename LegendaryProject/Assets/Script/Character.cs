@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public abstract class Character : MonoBehaviour, Damageable
 {
     protected Health health;
@@ -21,4 +22,6 @@ public abstract class Character : MonoBehaviour, Damageable
     {
         lifeTotal = newLifeTotal;
     }
+
+    public abstract void Footsteps();
 }

@@ -36,4 +36,9 @@ public class Player : Character {
     {
         health.TakeDamage(damage);
     }
+
+    public override void Footsteps()
+    {
+        
+    }
 }
