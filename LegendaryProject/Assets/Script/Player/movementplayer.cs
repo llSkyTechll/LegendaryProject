@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class movementplayer : MonoBehaviour {
     private CharacterController characterController;
+    private Vector3 movementY = Vector3.zero;
+    private Vector3 movementXZ= Vector3.zero;
     private float currentX = 0.0f;
-    public float momentum = 0.0f;
     private Animator animator;
     private float sensivity;
     public float distanceGround;
     public bool isGrounded = false;
+    public float SPEED = 300;
     // Use this for initialization
     void Start () {
         characterController = GetComponent<CharacterController>();
@@ -21,39 +23,22 @@ public class movementplayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CheckIfInAir();
-        if (Input.GetAxis("Jump") != 0 && isGrounded)
-        {
-                momentum = 0.15f;
-                animator.Play("Jump");
-                transform.Translate(0, momentum, 0);
-        }
-        
         currentX += Input.GetAxis("Mouse X")*sensivity;
-        processMovementInput();
-      
-    }
-
-    void LateUpdate()
-    {
-        if (isGrounded && momentum <0)
+        if(isGrounded)
         {
-            momentum = 0;
+            if(Input.GetButtonDown("Jump"))
+            {
+                movementY.y = 3;
+                animator.Play("Jump");
+            }
         }
-    }
-
-    void processMovementInput()
-    { 
-        var horizontal = Input.GetAxis("Horizontal");
-        var vertical = Input.GetAxis("Vertical");
-        if (!isGrounded)
+        else
         {
-            transform.Translate(0, momentum, 0);
-            momentum -=0.0045f;
+            movementY.y -= 9.8f * Time.deltaTime;
         }
-        Vector3 movement = new Vector3(horizontal,0,vertical);
-        Vector3 ajustedMovement = transform.TransformDirection(movement);
-        characterController.SimpleMove(ajustedMovement * Time.deltaTime * 500);
-        if (ajustedMovement!= new Vector3())
+
+        movementXZ = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if (movementXZ.x !=0 || movementXZ.z != 0)
         {
             animator.SetBool("Walking", true);
             Quaternion rotation = Quaternion.Euler(0, currentX, 0);
@@ -63,17 +48,39 @@ public class movementplayer : MonoBehaviour {
         {
             animator.SetBool("Walking", false);
         }
+        Vector3 ajustedMovementXZ = gameObject.transform.TransformDirection(movementXZ);
+        if (Input.GetAxis("Sprint") != 0)
+        {
+            ajustedMovementXZ = ajustedMovementXZ.normalized * SPEED *2.5f;
+            if (animator.GetBool("Walking"))
+            {
+                animator.SetBool("Running", true);
+            }
+            else
+            {
+                animator.SetBool("Running", false);
+            }
+        }
+        else
+        {
+            ajustedMovementXZ = ajustedMovementXZ.normalized * SPEED;
+            animator.SetBool("Running", false);
+        }
+        
+        Vector3 ajustedMovement = ajustedMovementXZ+movementY;
+        characterController.Move(ajustedMovement * Time.deltaTime);
+    }
+
+    void LateUpdate()
+    {
+        if (isGrounded && movementY.y <0)
+        {
+            movementY.y = 0;
+        }
     }
 
     void CheckIfInAir()
     {
-        if (!Physics.Raycast(transform.position, -Vector3.up, distanceGround + 0.1f,9))
-        {
-            isGrounded = false;
-        }
-        else
-        {
-            isGrounded = true;
-        }
+        isGrounded=Physics.Raycast(transform.position, -Vector3.up, distanceGround + 0.1f/*, 9*/);
     }
 }
