@@ -14,6 +14,9 @@ public class EnemyAI : GhostTiger
     private float attackSpeed = 1f;
     private float attackCooldown = 0f;
 
+    private Armor playerArmor;
+    private Health playerHealth;
+
     // Use this for initialization
     void Start()
     {
@@ -22,6 +25,8 @@ public class EnemyAI : GhostTiger
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
         player = PlayerManager.instance.player;
+        playerArmor = player.GetComponentInChildren<Armor>();
+        playerHealth = player.GetComponent<Health>();
     }
 
     // Update is called once per frame
@@ -52,7 +57,8 @@ public class EnemyAI : GhostTiger
                 if (attackCooldown <= 0f)
                 {
                     animator.Play("Skill2");
-                    player.GetComponent<Health>().TakeDamage(10);
+                    DealDamage();
+                    //player.GetComponent<Health>().TakeDamage(10);
                     attackCooldown = 2f / attackSpeed;
                 }
                 FaceTarget();
@@ -75,5 +81,12 @@ public class EnemyAI : GhostTiger
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    void DealDamage()
+    {
+        int damage = 10;
+        damage = damage - playerArmor.damageBlocked;
+        playerHealth.TakeDamage(damage);
     }
 }
