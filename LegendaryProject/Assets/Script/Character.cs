@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public abstract class Character : MonoBehaviour, Damageable
 {
     protected Health health;
     public int lifeTotal = 1;
+    protected AudioSource stepplayer;
 
     public void TakeDamage(int damage)
     {
@@ -21,4 +23,6 @@ public abstract class Character : MonoBehaviour, Damageable
     {
         lifeTotal = newLifeTotal;
     }
+
+    public abstract void Footsteps();
 }
