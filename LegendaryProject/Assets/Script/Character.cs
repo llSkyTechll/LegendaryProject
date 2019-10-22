@@ -8,6 +8,7 @@ public abstract class Character : MonoBehaviour, Damageable
 {
     protected Health health;
     public int lifeTotal = 1;
+    protected AudioSource stepplayer;
 
     public void TakeDamage(int damage)
     {

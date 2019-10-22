@@ -24,6 +24,7 @@ public class EnemyAI : Character
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
         player = PlayerManager.instance.player;
+        stepplayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -93,12 +94,11 @@ public class EnemyAI : Character
 
     public override void Footsteps()
     {
-        print(agent.velocity.magnitude);
         if (agent.velocity.magnitude > 2f && GetComponent<AudioSource>().isPlaying == false)
         {
-            GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1);
-            GetComponent<AudioSource>().volume = Random.Range(0.8f, 1.1f);
-            GetComponent<AudioSource>().Play();
+            stepplayer.pitch = Random.Range(0.8f, 1);
+            stepplayer.volume = Random.Range(0.8f, 1.1f);
+            stepplayer.Play();
         }
     }
 }
