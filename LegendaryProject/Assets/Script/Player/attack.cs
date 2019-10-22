@@ -13,6 +13,7 @@ public class attack : MonoBehaviour {
     private float attackCooldown = 0f;
     private int minDamage = 1;
     private int maxDamage = 1;
+    private bool isGrounded;
 
     // Use this for initialization
     void Start () {
@@ -28,10 +29,11 @@ public class attack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        isGrounded = GetComponent<movementplayer>().isGrounded;
         attackCooldown -= Time.deltaTime;
         if (Input.GetAxis("Fire1")!=0)
         {
-            if (axisInUse == false && characterController.isGrounded)
+            if (axisInUse == false && isGrounded)
             {
                 if (attackCooldown <= 0f)
                 {
