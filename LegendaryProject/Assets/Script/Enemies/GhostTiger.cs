@@ -6,6 +6,7 @@ public class GhostTiger : EnemyAI {
     public float speed = 1;
     protected Rigidbody rbd;
     AudioSource audioSource;
+    public AudioClip attackSound;
     //public AudioMusic audioMusic;
 
     // Use this for initialization

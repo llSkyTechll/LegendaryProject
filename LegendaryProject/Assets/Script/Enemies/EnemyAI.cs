@@ -18,6 +18,7 @@ public class EnemyAI : Character
     protected Animator animator;
     private Armor playerArmor;
     private Health playerHealth;
+    public AudioClip attack;
 
     private int damageReduction = 0;
 
@@ -29,7 +30,7 @@ public class EnemyAI : Character
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
         player = PlayerManager.instance.player;
-        stepplayer = GetComponent<AudioSource>();
+        soundplayer = GetComponent<AudioSource>();
         playerArmor = player.GetComponentInChildren<Armor>();
         if (playerArmor != null)
         {
@@ -57,9 +58,9 @@ public class EnemyAI : Character
                 agent.SetDestination(target.position);
                 if (attackCooldown <= 0f && agent.velocity.magnitude / agent.speed != 0)
                 {
-                   animator.Play("Run");
+                    animator.Play("Run");
                 }
-                
+
                 FaceTarget();
             }
             else if (distance <= agent.stoppingDistance)
@@ -98,12 +99,21 @@ public class EnemyAI : Character
         animator.SetTrigger("Death");
         Destroy(gameObject, 10);
     }
-    
-        void DealDamage()
+
+    void DealDamage()
     {
         int damage = 10;
         damage = damage - damageReduction;
         playerHealth.TakeDamage(damage);
+        AttackSound();
+    }
+
+    void AttackSound()
+    {
+        soundplayer.clip = attack;
+        soundplayer.pitch = Random.Range(0.8f, 1.2f);
+        soundplayer.volume = Random.Range(0.8f, 1.1f);
+        soundplayer.Play();
     }
 
     public override void OnDamage(int damage)
@@ -115,9 +125,10 @@ public class EnemyAI : Character
     {
         if (agent.velocity.magnitude > 2f && GetComponent<AudioSource>().isPlaying == false)
         {
-            stepplayer.pitch = Random.Range(0.8f, 1);
-            stepplayer.volume = Random.Range(0.8f, 1.1f);
-            stepplayer.Play();
+            soundplayer.clip = step;
+            soundplayer.pitch = Random.Range(0.8f, 1);
+            soundplayer.volume = Random.Range(0.8f, 1.1f);
+            soundplayer.Play();
         }
     }
 }
