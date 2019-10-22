@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : GhostTiger
+public class EnemyAI : Character
 {
 
     public float lookRadius = 25f;
@@ -14,6 +14,8 @@ public class EnemyAI : GhostTiger
     private float attackSpeed = 1f;
     private float attackCooldown = 0f;
 
+    protected GameObject player;
+    protected Animator animator;
     private Armor playerArmor;
     private Health playerHealth;
 
@@ -27,6 +29,7 @@ public class EnemyAI : GhostTiger
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
         player = PlayerManager.instance.player;
+        stepplayer = GetComponent<AudioSource>();
         playerArmor = player.GetComponentInChildren<Armor>();
         if (playerArmor != null)
         {
@@ -38,6 +41,7 @@ public class EnemyAI : GhostTiger
     // Update is called once per frame
     void Update()
     {
+        Footsteps();
         attackCooldown -= Time.deltaTime;
         if (health.currentHealth <= 0)
         {
@@ -89,10 +93,31 @@ public class EnemyAI : GhostTiger
         Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
 
-    void DealDamage()
+    public override void Die()
+    {
+        animator.SetTrigger("Death");
+        Destroy(gameObject, 10);
+    }
+    
+        void DealDamage()
     {
         int damage = 10;
         damage = damage - damageReduction;
         playerHealth.TakeDamage(damage);
+    }
+
+    public override void OnDamage(int damage)
+    {
+        health.TakeDamage(damage);
+    }
+
+    public override void Footsteps()
+    {
+        if (agent.velocity.magnitude > 2f && GetComponent<AudioSource>().isPlaying == false)
+        {
+            stepplayer.pitch = Random.Range(0.8f, 1);
+            stepplayer.volume = Random.Range(0.8f, 1.1f);
+            stepplayer.Play();
+        }
     }
 }
