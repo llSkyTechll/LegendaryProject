@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : Character {
     //GameObject player;
@@ -29,7 +30,7 @@ public class Player : Character {
     public override void Die()
     {
         //animator.SetTrigger("Death");
-        Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public override void OnDamage(int damage)
