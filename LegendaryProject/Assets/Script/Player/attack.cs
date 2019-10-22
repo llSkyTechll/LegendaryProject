@@ -11,12 +11,19 @@ public class attack : MonoBehaviour {
     private CharacterController characterController;
     private Weapon equippedWeapon;
     private float attackCooldown = 0f;
+    private int minDamage = 1;
+    private int maxDamage = 1;
 
     // Use this for initialization
     void Start () {
         animator = GetComponentInChildren<Animator>();
         characterController = GetComponent<CharacterController>();
         equippedWeapon = GetComponentInChildren<Weapon>();
+        if (equippedWeapon != null)
+        {
+            minDamage = equippedWeapon.minDamage;
+            maxDamage = equippedWeapon.maxDamage;
+        }
     }
 	
 	// Update is called once per frame
@@ -51,7 +58,7 @@ public class attack : MonoBehaviour {
         RaycastHit hitinfo ;
         if (Physics.Raycast(origin,direction,out hitinfo,MaxDistance,layerMask, QueryTriggerInteraction.UseGlobal))
         {
-            DealRandomDamage(equippedWeapon.minDamage, equippedWeapon.maxDamage,hitinfo);
+            DealRandomDamage(minDamage, maxDamage,hitinfo);
         }
     }
 

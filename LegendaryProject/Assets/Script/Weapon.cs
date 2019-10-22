@@ -10,11 +10,11 @@ public class Weapon : Equipment {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        rarity = (Rarity)randomRarity.Next(0,5);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+    }
 }

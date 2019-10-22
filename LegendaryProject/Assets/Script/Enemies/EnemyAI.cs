@@ -17,6 +17,8 @@ public class EnemyAI : GhostTiger
     private Armor playerArmor;
     private Health playerHealth;
 
+    private int damageReduction = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -26,6 +28,10 @@ public class EnemyAI : GhostTiger
         health = GetComponent<Health>();
         player = PlayerManager.instance.player;
         playerArmor = player.GetComponentInChildren<Armor>();
+        if (playerArmor != null)
+        {
+            damageReduction = playerArmor.damageBlocked;
+        }
         playerHealth = player.GetComponent<Health>();
     }
 
@@ -86,7 +92,7 @@ public class EnemyAI : GhostTiger
     void DealDamage()
     {
         int damage = 10;
-        damage = damage - playerArmor.damageBlocked;
+        damage = damage - damageReduction;
         playerHealth.TakeDamage(damage);
     }
 }
