@@ -10,6 +10,7 @@ public class Player : Character
     public Interactable focus;
     CharacterController controller;
     MouvementCamera sceneCamera;
+    private CameraFocus cameraFocus;
     //Rigidbody rbd;
     //AudioSource audioSource;
     //private Animator animator;
@@ -21,6 +22,7 @@ public class Player : Character
         //audioSource = GameObject.FindGameObjectWithTag("SoundPlayer").GetComponent<AudioSource>();
         sceneCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>();
         controller = GetComponent<CharacterController>();
+        focus = null;
         SetLife(100);
         health = GetComponent<Health>();
         //animator = GetComponent<Animator>();
@@ -33,24 +35,27 @@ public class Player : Character
         {
             gameObject.GetComponent<Character>().Die();
         }
-        if (Input.GetAxis("Interact") != 0)
+        if (Input.GetButtonDown("Interact") )
         {
-            Debug.DrawRay(transform.position, transform.forward * 2f, Color.green);
-            
-            Collider[] ThingsInRange = Physics.OverlapSphere(transform.position, 2f, 9);
-            foreach (Collider Thing in ThingsInRange)
+            if (Input.GetButtonDown("Interact") && focus != null)
             {
-                Interactable interactable = Thing.GetComponent<Interactable>();
-                if (interactable != null)
+                sceneCamera.ResetFocus();
+                focus = null;
+            }
+            else
+            {
+                Collider[] ThingsInRange = Physics.OverlapSphere(transform.position, 2f, 9);
+                foreach (Collider Thing in ThingsInRange)
                 {
-                    SetFocus(interactable);
+                    Interactable interactable = Thing.GetComponent<Interactable>();
+                    if (interactable != null)
+                    {
+                        SetFocus(interactable);
+                    }
                 }
             }
         }
-        if (Input.GetAxis("Cancel") != 0)
-        {
-            sceneCamera.ResetFocus();
-        }
+        
 
     }
 
@@ -72,7 +77,16 @@ public class Player : Character
 
     void SetFocus(Interactable newFocus)
     {
+        cameraFocus = newFocus.GetComponentInChildren<CameraFocus>();
         focus = newFocus;
-        sceneCamera.ChangeFocus(focus.transform);
+        if (cameraFocus!=null)
+        {
+            sceneCamera.ChangeFocus(cameraFocus.transform);
+        }
+        else
+        {
+            sceneCamera.ChangeFocus(newFocus.transform);
+        }
+        
     }
 }

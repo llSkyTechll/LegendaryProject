@@ -6,6 +6,7 @@ public class MouvementCamera : MonoBehaviour {
 
     public Transform lookAt;
     public Transform camTransform;
+    public bool PlayerNotFocused=false; 
     private Transform playerTransform;
 
     //private Camera cam;
@@ -17,6 +18,8 @@ public class MouvementCamera : MonoBehaviour {
     private float distance = 5.0f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
+    private float preInteractCurrentX = 0.0f;
+    private float preInteractCurrentY = 0.0f;
     public float sensivityX = 10.0f;
     private float sensivityY = 4.0f;
 
@@ -47,11 +50,19 @@ public class MouvementCamera : MonoBehaviour {
 
     public void ChangeFocus(Transform newFocus)
     {
+        preInteractCurrentX = currentX;
+        preInteractCurrentY = currentY;
+        distance = 3f;
         lookAt = newFocus;
+        PlayerNotFocused = true;
     }
 
     public void ResetFocus()
     {
+        currentX = preInteractCurrentX;
+        currentY = preInteractCurrentY;
+        distance = 5f;
         lookAt = playerTransform;
+        PlayerNotFocused = false;
     }
 }
