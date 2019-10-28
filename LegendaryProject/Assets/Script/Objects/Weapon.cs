@@ -16,6 +16,7 @@ public class Weapon : Equipment {
     void Start () {
         rarity = (Rarity)randomRarity.Next(0,5);
         soundplayer = GetComponent<AudioSource>();
+        soundplayer.spatialBlend = 1;
     }
 	
 	// Update is called once per frame

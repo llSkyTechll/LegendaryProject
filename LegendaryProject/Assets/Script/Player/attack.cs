@@ -13,8 +13,6 @@ public class attack : MonoBehaviour {
     private float attackCooldown = 0f;
     private int minDamage = 1;
     private int maxDamage = 1;
-    private AudioClip SwishSound;
-    private AudioClip HitSound;
 
     // Use this for initialization
     void Start () {
@@ -25,8 +23,6 @@ public class attack : MonoBehaviour {
         {
             minDamage = equippedWeapon.minDamage;
             maxDamage = equippedWeapon.maxDamage;
-            SwishSound = equippedWeapon.SwishSound;
-            HitSound = equippedWeapon.HitSound;
         }
     }
 	
