@@ -5,15 +5,14 @@ using UnityEngine;
 
 public class attack : MonoBehaviour {
     [SerializeField]
-    private float MaxDistance = 2f;
+    private float attackRange = 2f;
     private bool axisInUse = false;
     private Animator animator;
     private CharacterController characterController;
     private Weapon equippedWeapon;
     private float attackCooldown = 0f;
-    private int minDamage = 1;
-    private int maxDamage = 1;
-    private bool isGrounded;
+    private int minDamage = 5;
+    private int maxDamage = 5;
 
     // Use this for initialization
     void Start () {
@@ -24,16 +23,16 @@ public class attack : MonoBehaviour {
         {
             minDamage = equippedWeapon.minDamage;
             maxDamage = equippedWeapon.maxDamage;
+            attackRange = equippedWeapon.range;
         }
     }
 	
 	// Update is called once per frame
 	void Update () {
-        isGrounded = GetComponent<movementplayer>().isGrounded;
         attackCooldown -= Time.deltaTime;
-        if (Input.GetAxis("Fire1")!=0)
+        if (Input.GetAxis("Fire1")!=0 && !GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().PlayerNotFocused)
         {
-            if (axisInUse == false && isGrounded)
+            if (axisInUse == false && GetComponent<movementplayer>().isGrounded)
             {
                 if (attackCooldown <= 0f)
                 {
@@ -55,10 +54,10 @@ public class attack : MonoBehaviour {
         Vector3 origin = transform.position;
         Vector3 direction = transform.forward;
 
-        Debug.DrawRay(origin, direction * MaxDistance, Color.green);
+        Debug.DrawRay(origin, direction * attackRange, Color.green);
         int layerMask = 1 << 9;
         RaycastHit hitinfo ;
-        if (Physics.Raycast(origin,direction,out hitinfo,MaxDistance,layerMask, QueryTriggerInteraction.UseGlobal))
+        if (Physics.Raycast(origin,direction,out hitinfo,attackRange,layerMask, QueryTriggerInteraction.UseGlobal))
         {
             DealRandomDamage(minDamage, maxDamage,hitinfo);
         }

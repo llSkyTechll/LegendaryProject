@@ -23,52 +23,61 @@ public class movementplayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CheckIfInAir();
-        currentX += Input.GetAxis("Mouse X")*sensivity;
-        if(isGrounded)
+        if (!GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().PlayerNotFocused)
         {
-            if(Input.GetButtonDown("Jump"))
+            currentX += Input.GetAxis("Mouse X") * sensivity;
+            if (isGrounded)
             {
-                movementY.y = 3;
-                animator.Play("Jump");
+                if (Input.GetButtonDown("Jump"))
+                {
+                    movementY.y = 3;
+                    animator.Play("Jump");
+                }
             }
-        }
-        else
-        {
-            movementY.y -= 9.8f * Time.deltaTime;
-        }
+            else
+            {
+                movementY.y -= 9.8f * Time.deltaTime;
+            }
 
-        movementXZ = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        if (movementXZ.x !=0 || movementXZ.z != 0)
-        {
-            animator.SetBool("Walking", true);
-            Quaternion rotation = Quaternion.Euler(0, currentX, 0);
-            transform.rotation = rotation;
+            movementXZ = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            if (movementXZ.x != 0 || movementXZ.z != 0)
+            {
+                animator.SetBool("Walking", true);
+                Quaternion rotation = Quaternion.Euler(0, currentX, 0);
+                transform.rotation = rotation;
+            }
+            else
+            {
+                animator.SetBool("Walking", false);
+            }
+            Vector3 ajustedMovementXZ = gameObject.transform.TransformDirection(movementXZ);
+            if (Input.GetAxis("Sprint") != 0)
+            {
+                ajustedMovementXZ = ajustedMovementXZ.normalized * SPEED * 2.5f;
+                if (animator.GetBool("Walking"))
+                {
+                    animator.SetBool("Running", true);
+                }
+                else
+                {
+                    animator.SetBool("Running", false);
+                }
+            }
+            else
+            {
+                ajustedMovementXZ = ajustedMovementXZ.normalized * SPEED;
+                animator.SetBool("Running", false);
+            }
+        
+            Vector3 ajustedMovement = ajustedMovementXZ + movementY;
+            characterController.Move(ajustedMovement * Time.deltaTime);
         }
         else
         {
             animator.SetBool("Walking", false);
-        }
-        Vector3 ajustedMovementXZ = gameObject.transform.TransformDirection(movementXZ);
-        if (Input.GetAxis("Sprint") != 0)
-        {
-            ajustedMovementXZ = ajustedMovementXZ.normalized * SPEED *2.5f;
-            if (animator.GetBool("Walking"))
-            {
-                animator.SetBool("Running", true);
-            }
-            else
-            {
-                animator.SetBool("Running", false);
-            }
-        }
-        else
-        {
-            ajustedMovementXZ = ajustedMovementXZ.normalized * SPEED;
             animator.SetBool("Running", false);
         }
-        
-        Vector3 ajustedMovement = ajustedMovementXZ+movementY;
-        characterController.Move(ajustedMovement * Time.deltaTime);
+       
     }
 
     void LateUpdate()
