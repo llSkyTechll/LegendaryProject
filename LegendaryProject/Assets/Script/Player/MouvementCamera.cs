@@ -6,6 +6,7 @@ public class MouvementCamera : MonoBehaviour {
 
     public Transform lookAt;
     public Transform camTransform;
+    private Transform playerTransform;
 
     //private Camera cam;
 
@@ -21,6 +22,7 @@ public class MouvementCamera : MonoBehaviour {
 
     private void Start()
     {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         camTransform = transform;
        // cam = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
@@ -41,5 +43,15 @@ public class MouvementCamera : MonoBehaviour {
         Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
         camTransform.position = lookAt.position + rotation * dir;
         camTransform.LookAt(lookAt.position);
+    }
+
+    public void ChangeFocus(Transform newFocus)
+    {
+        lookAt = newFocus;
+    }
+
+    public void ResetFocus()
+    {
+        lookAt = playerTransform;
     }
 }
