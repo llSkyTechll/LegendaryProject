@@ -13,6 +13,8 @@ public class attack : MonoBehaviour {
     private float attackCooldown = 0f;
     private int minDamage = 1;
     private int maxDamage = 1;
+    private AudioClip SwishSound;
+    private AudioClip HitSound;
 
     // Use this for initialization
     void Start () {
@@ -23,6 +25,8 @@ public class attack : MonoBehaviour {
         {
             minDamage = equippedWeapon.minDamage;
             maxDamage = equippedWeapon.maxDamage;
+            SwishSound = equippedWeapon.SwishSound;
+            HitSound = equippedWeapon.HitSound;
         }
     }
 	
@@ -37,6 +41,10 @@ public class attack : MonoBehaviour {
                 {
                     axisInUse = true;
                     animator.SetTrigger("Attacking");
+                    if (equippedWeapon != null)
+                    {
+                        equippedWeapon.Swish();
+                    }
                     RaycastSingle();
                     attackCooldown = 1.5f;
                 } 
@@ -59,6 +67,10 @@ public class attack : MonoBehaviour {
         if (Physics.Raycast(origin,direction,out hitinfo,MaxDistance,layerMask, QueryTriggerInteraction.UseGlobal))
         {
             DealRandomDamage(minDamage, maxDamage,hitinfo);
+            if (equippedWeapon != null)
+            {
+                equippedWeapon.Hit();
+            }
         }
     }
 
