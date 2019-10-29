@@ -38,6 +38,10 @@ public class attack : MonoBehaviour {
                 {
                     axisInUse = true;
                     animator.SetTrigger("Attacking");
+                    if (equippedWeapon != null)
+                    {
+                        equippedWeapon.Swish();
+                    }
                     RaycastSingle();
                     attackCooldown = 1.5f;
                 } 
@@ -60,6 +64,10 @@ public class attack : MonoBehaviour {
         if (Physics.Raycast(origin,direction,out hitinfo,attackRange,layerMask, QueryTriggerInteraction.UseGlobal))
         {
             DealRandomDamage(minDamage, maxDamage,hitinfo);
+            if (equippedWeapon != null)
+            {
+                equippedWeapon.Hit();
+            }
         }
     }
 

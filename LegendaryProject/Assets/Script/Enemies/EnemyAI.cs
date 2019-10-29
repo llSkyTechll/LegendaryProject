@@ -123,7 +123,7 @@ public class EnemyAI : Character
 
     public override void Footsteps()
     {
-        if (agent.velocity.magnitude > 2f && GetComponent<AudioSource>().isPlaying == false)
+        if (agent.velocity.magnitude > 2f && soundplayer.isPlaying == false)
         {
             soundplayer.clip = step;
             soundplayer.pitch = Random.Range(0.8f, 1);

@@ -25,6 +25,7 @@ public class Player : Character
         focus = null;
         SetLife(100);
         health = GetComponent<Health>();
+        soundplayer = GetComponent<AudioSource>();
         //animator = GetComponent<Animator>();
     }
 
@@ -35,6 +36,7 @@ public class Player : Character
         {
             gameObject.GetComponent<Character>().Die();
         }
+        Footsteps();
         if (Input.GetButtonDown("Interact") )
         {
             if (Input.GetButtonDown("Interact") && focus != null)
@@ -73,10 +75,22 @@ public class Player : Character
 
     public override void Footsteps()
     {
-
-    }
-
-    void SetFocus(Interactable newFocus)
+        if(controller.velocity.magnitude > 0.5f && controller.velocity.magnitude < 5f && soundplayer.isPlaying == false && GetComponent<movementplayer>().isGrounded)
+        {
+            soundplayer.clip = step;
+            soundplayer.pitch = Random.Range(0.8f, 1);
+            soundplayer.volume = Random.Range(0.8f, 1.1f);
+            soundplayer.Play();
+        }
+        else if(soundplayer.isPlaying == false && controller.velocity.magnitude > 5f && GetComponent<movementplayer>().isGrounded)
+        {
+            soundplayer.clip = step;
+            soundplayer.pitch = Random.Range(1.3f, 1.5f);
+            soundplayer.volume = Random.Range(0.8f, 1.1f);
+            soundplayer.Play();
+        }
+     }
+     void SetFocus(Interactable newFocus)
     {
         cameraFocus = newFocus.GetComponentInChildren<CameraFocus>();
         focus = newFocus;
@@ -88,6 +102,8 @@ public class Player : Character
         {
             sceneCamera.ChangeFocus(newFocus.transform);
         }
+        
+    }
         
     }
 }
