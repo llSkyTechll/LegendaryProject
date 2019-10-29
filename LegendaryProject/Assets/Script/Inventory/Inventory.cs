@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour {
             AddItem(itemPickedUp,item.ID, item.type, item.description, item.icon);
         }
     }
-    void AddItem(GameObject ItemObject,int ItemId, string ItemType, string ItemDescription, Texture2D ItemIcon)
+    void AddItem(GameObject ItemObject,int ItemId, string ItemType, string ItemDescription, Sprite ItemIcon)
     {
         for (int i = 0; i < allSlots; i++)
         {
@@ -68,8 +68,10 @@ public class Inventory : MonoBehaviour {
                 ItemObject.transform.parent = slot[i].transform;
                 ItemObject.SetActive(false);
 
+                slot[i].GetComponent<Slots>().UpdateSlot();
                 slot[i].GetComponent<Slots>().empty = false;
             }
+            return;
         }
     }
 }
