@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : Character
+public abstract class EnemyAI : Character
 {
 
     public float lookRadius = 25f;
@@ -20,8 +20,10 @@ public class EnemyAI : Character
     private Health playerHealth;
 
     private int damageReduction = 0;
-
+    protected string animationRunName="Run";
     // Use this for initialization
+
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -36,11 +38,13 @@ public class EnemyAI : Character
             damageReduction = playerArmor.damageBlocked;
         }
         playerHealth = player.GetComponent<Health>();
+        animationRunName = GetAnimationRunName();
     }
 
     // Update is called once per frame
-    void Update()
+    protected void OnUpdate()
     {
+        print(agent);
         Footsteps();
         attackCooldown -= Time.deltaTime;
         if (health.currentHealth <= 0)
@@ -57,9 +61,9 @@ public class EnemyAI : Character
                 agent.SetDestination(target.position);
                 if (attackCooldown <= 0f && agent.velocity.magnitude / agent.speed != 0)
                 {
-                   animator.Play("Run");
+                    animator.Play(animationRunName);
                 }
-                
+
                 FaceTarget();
             }
             else if (distance <= agent.stoppingDistance)
@@ -78,6 +82,13 @@ public class EnemyAI : Character
                 animator.Play("Idle");
             }
         }
+    }
+    protected abstract string GetAnimationRunName();
+    
+    void Update()
+    {
+        OnUpdate();
+        
     }
 
     void FaceTarget()
@@ -113,8 +124,10 @@ public class EnemyAI : Character
 
     public override void Footsteps()
     {
+        
         if (agent.velocity.magnitude > 2f && GetComponent<AudioSource>().isPlaying == false)
         {
+            
             stepplayer.pitch = Random.Range(0.8f, 1);
             stepplayer.volume = Random.Range(0.8f, 1.1f);
             stepplayer.Play();

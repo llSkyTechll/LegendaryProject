@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : EnemyAI {
+public class Boss : EnemyAI
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Use this for initialization
+
+
+    // Update is called once per frame
+    protected override string GetAnimationRunName()
+    {
+        return "Run";
+    }
 }
