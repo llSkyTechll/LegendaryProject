@@ -363,6 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookAt: {fileID: 1985475455}
   camTransform: {fileID: 0}
+  PlayerNotFocused: 0
   sensivityX: 10
 --- !u!81 &319776931
 AudioListener:
@@ -508,7 +509,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f9e0f68e2e0c1a440a7c4d258210b4b6, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: f9e0f68e2e0c1a440a7c4d258210b4b6, type: 3}
       propertyPath: m_Name
@@ -611,7 +612,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.38906613}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1985475453
 Prefab:
