@@ -6,7 +6,15 @@ public class GhostTiger : EnemyAI {
     public float speed = 1;
     protected Rigidbody rbd;
     AudioSource audioSource;
+
     public AudioClip attackSound;
+
+
+    protected override string GetAnimationRunName()
+    {
+        return "run";
+    }
+
     //public AudioMusic audioMusic;
 
     // Use this for initialization
@@ -20,9 +28,7 @@ public class GhostTiger : EnemyAI {
     }
 	
 	// Update is called once per frame
-	void Update () {
-        
-    }
+	
 
     //private void FollowPlayer()
     //{
