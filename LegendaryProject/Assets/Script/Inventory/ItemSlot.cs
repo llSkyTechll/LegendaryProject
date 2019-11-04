@@ -9,6 +9,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
    [SerializeField] public Image image;
 
     public event Action<Item> OnRightClickEvent;
+
     private Item _item;
     public  Item Item
     {
@@ -34,9 +35,9 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData != null && eventData.button == PointerEventData.InputButton.Right)
-        {
+        {           
             if (Item != null && OnRightClickEvent != null)
-            {
+            { 
                 OnRightClickEvent(Item);
             }
         }

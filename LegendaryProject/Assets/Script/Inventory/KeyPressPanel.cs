@@ -1,19 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class KeyPressPanel : MonoBehaviour {
+public class KeyPressPanel : MonoBehaviour
+{
+    [SerializeField] GameObject inventoryGameObject;
+    [SerializeField] KeyCode[] toggleInventoryKeys;
+	void Update ()
+    {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.C))
+        for (int i = 0; i < toggleInventoryKeys.Length; i++)
         {
-            gameObject.SetActive(!gameObject.activeSelf);
+            if (Input.GetKeyDown(toggleInventoryKeys[i]))
+            {
+                inventoryGameObject.SetActive(!inventoryGameObject.activeSelf);
+                if (inventoryGameObject.activeSelf)
+                {
+                    ShowMouseCursor();
+                }
+                else
+                {
+                    HideMouseCusor();
+                }
+                break;
+            }
         }
+    }
+
+    public void ShowMouseCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    public void HideMouseCusor()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

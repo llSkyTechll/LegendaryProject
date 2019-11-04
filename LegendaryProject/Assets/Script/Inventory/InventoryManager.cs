@@ -9,6 +9,7 @@ public class InventoryManager : MonoBehaviour {
     private void Awake()
     {
         inventory.OnItemRightClickedEvent += EquipFromIventory;
+        equipmentPanel.OnItemRightClickedEvent += UnEquipFromEquipPanel;
     }
     private void EquipFromIventory(Item item)
     {
@@ -17,8 +18,17 @@ public class InventoryManager : MonoBehaviour {
             Equip((EquipableItem)item);
         }
     }
+
+    private void UnEquipFromEquipPanel(Item item)
+    {
+        if (item is EquipableItem)
+        {
+            UnEquip((EquipableItem)item);
+        }
+    }
     public void Equip(EquipableItem item)
     {
+        
         if (inventory.RemoveItem(item))
         {
             EquipableItem previousItem;

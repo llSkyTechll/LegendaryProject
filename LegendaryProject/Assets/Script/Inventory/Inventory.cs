@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,14 +10,7 @@ public class Inventory : MonoBehaviour {
 
     public event Action<Item> OnItemRightClickedEvent;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
-        {
-            gameObject.SetActive(!gameObject.activeSelf);
-        }
-    }
-    private void Awake()
+    private void Start()
     {
         for (int i = 0; i < itemSlots.Length; i++)
         {

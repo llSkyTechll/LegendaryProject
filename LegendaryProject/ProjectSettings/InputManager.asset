@@ -246,11 +246,11 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Inventory
+    m_Name: Submit
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: i
+    positiveButton: return
     altNegativeButton: 
     altPositiveButton: joystick button 0
     gravity: 1000
@@ -262,13 +262,13 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Character Panel
+    m_Name: Submit
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: 
+    positiveButton: enter
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: space
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
