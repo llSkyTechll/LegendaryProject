@@ -34,10 +34,19 @@ public class MouvementCamera : MonoBehaviour {
 
     private void Update()
     {
-        currentX += Input.GetAxis("Mouse X")*sensivityX;
-        currentY -= Input.GetAxis("Mouse Y")*sensivityY; // pouvoir modifier avec les options plus tard += ou -=
+        if (CanMoveCamera())
+        {
+            currentX += Input.GetAxis("Mouse X") * sensivityX;
+            currentY -= Input.GetAxis("Mouse Y") * sensivityY; // pouvoir modifier avec les options plus tard += ou -=
+            currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
+        }
+    }
 
-        currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
+    private bool CanMoveCamera()
+    {
+        return !PlayerNotFocused &&
+            !GameObject.FindGameObjectWithTag("Inventory").GetComponentInChildren<KeyPressPanel>().GetInventoryIsOpen() &&
+            !GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetIsDead();
     }
 
     private void LateUpdate()

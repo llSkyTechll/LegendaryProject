@@ -21,9 +21,10 @@ public class movementplayer : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         CheckIfInAir();
-        if (!GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().PlayerNotFocused)
+        if (CanMove())
         {
             currentX += Input.GetAxis("Mouse X") * sensivity;
             if (isGrounded)
@@ -68,7 +69,7 @@ public class movementplayer : MonoBehaviour {
                 ajustedMovementXZ = ajustedMovementXZ.normalized * SPEED;
                 animator.SetBool("Running", false);
             }
-        
+
             Vector3 ajustedMovement = ajustedMovementXZ + movementY;
             characterController.Move(ajustedMovement * Time.deltaTime);
         }
@@ -77,7 +78,14 @@ public class movementplayer : MonoBehaviour {
             animator.SetBool("Walking", false);
             animator.SetBool("Running", false);
         }
-       
+
+    }
+
+    private static bool CanMove()
+    {
+        return !GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().PlayerNotFocused &&
+            !GameObject.FindGameObjectWithTag("Inventory").GetComponentInChildren<KeyPressPanel>().GetInventoryIsOpen() &&
+            !GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetIsDead();
     }
 
     void LateUpdate()

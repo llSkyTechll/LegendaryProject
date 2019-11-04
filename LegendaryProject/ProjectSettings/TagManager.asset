@@ -4,10 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Item
   - Lava
   - LaserStart
   - LaserEnd
   - Laser
+  - Inventory
   layers:
   - Default
   - TransparentFX

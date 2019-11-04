@@ -84,6 +84,11 @@ public class Player : Character
         }
     }
 
+    public bool GetIsDead()
+    {
+        return isDead;
+    }
+
     public override void OnDamage(int damage)
     {
         damage -= damageReduction;

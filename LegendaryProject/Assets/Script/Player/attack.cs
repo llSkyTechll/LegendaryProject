@@ -26,9 +26,10 @@ public class attack : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         attackCooldown -= Time.deltaTime;
-        if (Input.GetAxis("Fire1")!=0 && !GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().PlayerNotFocused)
+        if (CanAttack())
         {
             if (axisInUse == false && GetComponent<movementplayer>().isGrounded)
             {
@@ -42,14 +43,22 @@ public class attack : MonoBehaviour {
                     }
                     RaycastSingle();
                     attackCooldown = 1.5f;
-                } 
+                }
             }
         }
         if (Input.GetAxis("Fire1") == 0)
         {
             axisInUse = false;
         }
-	}
+    }
+
+    private static bool CanAttack()
+    {
+        return Input.GetAxis("Fire1") != 0 &&
+            !GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().PlayerNotFocused &&
+            !GameObject.FindGameObjectWithTag("Inventory").GetComponentInChildren<KeyPressPanel>().GetInventoryIsOpen() &&
+            !GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetIsDead();
+    }
 
     private void RaycastSingle()
     {

@@ -87,7 +87,7 @@ public class GhostTiger : EnemyAI {
 
     protected override float SetlookRadius()
     {
-        return 25f;
+        return 10f;
     }
 
 
