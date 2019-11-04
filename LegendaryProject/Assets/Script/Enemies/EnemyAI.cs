@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+[RequireComponent(typeof(AudioSource))]
 public abstract class EnemyAI : Character
 {
 
@@ -16,8 +16,6 @@ public abstract class EnemyAI : Character
 
     protected GameObject player;
     protected Animator animator;
-    protected Armor playerArmor;
-    protected Health playerHealth;
     public AudioClip attack;
 
     protected int damageReduction = 0;
@@ -30,7 +28,14 @@ public abstract class EnemyAI : Character
 
     void Start()
     {
+        player = PositionManager.instance.player;
+        soundplayer = GetComponent<AudioSource>();
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
+        target = PositionManager.instance.player.transform;
         OnStart();
+
     }
     protected abstract void OnStart();
 
@@ -48,7 +53,7 @@ public abstract class EnemyAI : Character
 
     }
     protected abstract void OnUpdate();
-    
+
     protected void FaceTarget()
     {
         Vector3 direction = (target.position - transform.position).normalized;
@@ -68,11 +73,9 @@ public abstract class EnemyAI : Character
         Destroy(gameObject, 10);
     }
 
-    protected void DealDamage()
+    protected void DealDamage(int damage)
     {
-        int damage = 10;
-        damage = damage - damageReduction;
-        playerHealth.TakeDamage(damage);
+        player.GetComponent<Player>().OnDamage(damage);
         AttackSound();
     }
 
@@ -91,12 +94,16 @@ public abstract class EnemyAI : Character
 
     public override void Footsteps()
     {
-        if (agent.velocity.magnitude > 2f && soundplayer.isPlaying == false)
+        if (agent.velocity.magnitude > 2 && soundplayer.isPlaying == false)
         {
+
+
             soundplayer.clip = step;
             soundplayer.pitch = Random.Range(0.8f, 1);
             soundplayer.volume = Random.Range(0.8f, 1.1f);
             soundplayer.Play();
+
+
 
         }
     }

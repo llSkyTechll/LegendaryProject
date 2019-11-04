@@ -12,8 +12,6 @@ public class Boss : EnemyAI
     private LineRenderer laserLine;
     private GameObject laser;
 
-    //string[] Attacks = new string[] { "AttackTail", "JumpStationary", "AttackBite" };
-    //string[] Deaths = new string[] { "DeathHit", "DeathKnockback" };
     protected override string GetAnimationAttackName()
     {
         return "AttackTail";
@@ -37,29 +35,23 @@ public class Boss : EnemyAI
     bool Aim = false;
     bool Moving = false;
     float TimeBeforeAction = 5f;
+    float TimeBeforeShoot = 4f;
+
     [System.Obsolete]
     protected override void OnStart()
     {
-        agent = GetComponent<NavMeshAgent>();
-        target = PositionManager.instance.player.transform;
-        animator = GetComponent<Animator>();
-        health = GetComponent<Health>();
-        player = PositionManager.instance.player;
-        soundplayer = GetComponent<AudioSource>();
-        playerArmor = player.GetComponentInChildren<Armor>();
-        if (playerArmor != null)
-        {
-            damageReduction = playerArmor.damageBlocked;
-        }
-        playerHealth = player.GetComponent<Health>();
+        SetLife(300);
         animationRunName = GetAnimationRunName();
         animationAttackName = GetAnimationAttackName();
         animationDeadName = GetAnimationDeadName();
         animationIdleName = GetAnimationIdleName();
         lookRadius = SetlookRadius();
+
         startPoint = PositionManager.instance.LaserStart.transform;
         endPoint = PositionManager.instance.LaserEnd.transform;
+
         laser = GameObject.FindGameObjectWithTag("Laser");
+
         laserLine = laser.GetComponent<LineRenderer>();
         laserLine.SetWidth(0.2f, 0.2f);
         laser.SetActive(false);
@@ -81,11 +73,11 @@ public class Boss : EnemyAI
             float distance = Vector3.Distance(target.position, transform.position);
             if (distance <= lookRadius && distance > agent.stoppingDistance)
             {
-                int DistanceAttack = randomMove.Next(0, 2);
+                int RandomDistanceAttack = randomMove.Next(0, 2);
                 if (TimeBeforeAction <= 0)
                 {
                     ResetActionPossible();
-                    if (DistanceAttack == 0)
+                    if (RandomDistanceAttack == 0)
                     {
                         Run();
                         TimeBeforeAction = 5f;
@@ -105,8 +97,15 @@ public class Boss : EnemyAI
                     }
                     else if (Aim)
                     {
+                        if (TimeBeforeShoot <= 0)
+                        {
+                            AttackLaser();
+                        }
+                        else
+                        {
+                            Objectif();
+                        }
 
-                        Objectif();
                     }
                 }
 
@@ -114,10 +113,10 @@ public class Boss : EnemyAI
             }
             else if (distance <= agent.stoppingDistance)
             {
-                int CloseAttack = randomMove.Next(0, 2);
+                int RandomCloseAttack = randomMove.Next(0, 2);
                 if (attackCooldown <= 0f)
                 {
-                    if (CloseAttack == 0)
+                    if (RandomCloseAttack == 0)
                     {
                         animationAttackName = "AttackTail";
                         AttackTail();
@@ -142,27 +141,32 @@ public class Boss : EnemyAI
     {
         print("Tail");
         animator.Play(animationAttackName);
-        DealDamage();
+        DealDamage(10);
         //player.GetComponent<Health>().TakeDamage(10);
         attackCooldown = 2f / attackSpeed;
     }
 
     void AttackLaser()
     {
-        
+        print("Laser");
+        TimeBeforeShoot = 4f;
         RaycastHit hit;
+        animator.Play(animationAttackName);
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            //print("set");
+            print("set");
             if (hit.collider)
             {
                 laserLine.SetPosition(1, hit.point);
-                //print("hit");
+                DealDamage(5);
+                print("hit");
             }
         }
+
     }
     void Objectif()
     {
+        TimeBeforeShoot -= Time.deltaTime;
         laser.SetActive(true);
         print("Aim");
         Aim = true;
@@ -176,7 +180,7 @@ public class Boss : EnemyAI
     {
         print("Jump");
         animator.Play(animationAttackName);
-        DealDamage();
+        DealDamage(15);
         attackCooldown = 2f / attackSpeed;
     }
     void Run()
@@ -194,6 +198,8 @@ public class Boss : EnemyAI
     {
         Moving = false;
         Aim = false;
+        laser.SetActive(false);
+
     }
-    
+
 }

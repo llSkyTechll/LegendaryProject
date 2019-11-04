@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GhostTiger : EnemyAI {
     public float speed = 1;
@@ -33,18 +34,13 @@ public class GhostTiger : EnemyAI {
     //public AudioMusic audioMusic;
 
     // Use this for initialization
-    void Start () {
-        player = GameObject.FindGameObjectWithTag("Player");
+ 
+    protected override void OnStart()
+    {       
         rbd = GetComponent<Rigidbody>();
         //audioSource = GameObject.FindGameObjectWithTag("SoundPlayer").GetComponent<AudioSource>();
-        SetLife(100);
-        health = GetComponent<Health>();
-        animator = GetComponent<Animator>();
-    }
-
-    protected override void OnStart()
-    {
-       
+        SetLife(100);      
+        
     }
 
     protected override void OnUpdate()
@@ -76,7 +72,7 @@ public class GhostTiger : EnemyAI {
                 if (attackCooldown <= 0f)
                 {
                     animator.Play("Skill2");
-                    DealDamage();
+                    DealDamage(10);
                     //player.GetComponent<Health>().TakeDamage(10);
                     attackCooldown = 2f / attackSpeed;
                 }

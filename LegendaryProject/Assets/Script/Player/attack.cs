@@ -8,7 +8,6 @@ public class attack : MonoBehaviour {
     private float attackRange = 2f;
     private bool axisInUse = false;
     private Animator animator;
-    private CharacterController characterController;
     private Weapon equippedWeapon;
     private float attackCooldown = 0f;
     private int minDamage = 5;
@@ -17,7 +16,6 @@ public class attack : MonoBehaviour {
     // Use this for initialization
     void Start () {
         animator = GetComponentInChildren<Animator>();
-        characterController = GetComponent<CharacterController>();
         equippedWeapon = GetComponentInChildren<Weapon>();
         if (equippedWeapon != null)
         {
