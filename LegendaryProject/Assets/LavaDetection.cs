@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class LavaDetection : MonoBehaviour {
 
-    void OnTriggerStay(Collider col)
+    void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            //SceneManager.LoadScene("Boss Room");
+            col.gameObject.GetComponent<Player>().OnDamage(int.MaxValue);
         }
     }
 }

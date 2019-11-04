@@ -13,7 +13,8 @@ public class Player : Character
     private CameraFocus cameraFocus;
     //Rigidbody rbd;
     //AudioSource audioSource;
-    //private Animator animator;
+    private Animator animator;
+    private bool isDead;
     // Use this for initialization
     void Start()
     {
@@ -26,7 +27,7 @@ public class Player : Character
         SetLife(100);
         health = GetComponent<Health>();
         soundplayer = GetComponent<AudioSource>();
-        //animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -64,8 +65,16 @@ public class Player : Character
 
     public override void Die()
     {
-        //animator.SetTrigger("Death");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (!isDead)
+        {
+            animator.SetTrigger("Dead");
+            GetComponentInChildren<ParticleSystem>().Play();
+            isDead = true;
+        }
+        if (!GetComponentInChildren<ParticleSystem>().isPlaying)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public override void OnDamage(int damage)

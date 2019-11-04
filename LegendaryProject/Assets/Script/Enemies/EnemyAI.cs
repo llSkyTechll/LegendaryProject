@@ -8,19 +8,19 @@ public abstract class EnemyAI : Character
 
     public float lookRadius = 25f;
 
-    Transform target;
-    NavMeshAgent agent;
+    protected Transform target;
+    protected NavMeshAgent agent;
 
-    private float attackSpeed = 1f;
-    private float attackCooldown = 0f;
+    protected float attackSpeed = 1f;
+    protected float attackCooldown = 0f;
 
     protected GameObject player;
     protected Animator animator;
-    private Armor playerArmor;
-    private Health playerHealth;
-    public AudioClip attack;
+    protected Armor playerArmor;
+    protected Health playerHealth;
+    protected AudioClip attack;
 
-    private int damageReduction = 0;
+    protected int damageReduction = 0;
     protected string animationRunName="Run";
     // Use this for initialization
 
@@ -135,13 +135,16 @@ public abstract class EnemyAI : Character
 
     public override void Footsteps()
     {
-        if (agent.velocity.magnitude > 2f && soundplayer.isPlaying == false)
+        //if (agent.velocity.magnitude > 2f && soundplayer.isPlaying == false)
+        if (agent.velocity.magnitude > 2f)
         {
-            soundplayer.clip = step;
-            soundplayer.pitch = Random.Range(0.8f, 1);
-            soundplayer.volume = Random.Range(0.8f, 1.1f);
-            soundplayer.Play();
-
+            if (soundplayer.isPlaying == false)
+            {
+                soundplayer.clip = step;
+                soundplayer.pitch = Random.Range(0.8f, 1);
+                soundplayer.volume = Random.Range(0.8f, 1.1f);
+                soundplayer.Play();
+            }
         }
     }
 }
