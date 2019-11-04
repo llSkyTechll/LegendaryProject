@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour {
+public class PositionManager : MonoBehaviour {
 
     #region Singleton
 
-    public static PlayerManager instance;
+    public static PositionManager instance;
 
     void Awake()
     {
@@ -16,5 +16,7 @@ public class PlayerManager : MonoBehaviour {
     #endregion
 
     public GameObject player;
+    public GameObject LaserStart;
+    public GameObject LaserEnd;
 
 }

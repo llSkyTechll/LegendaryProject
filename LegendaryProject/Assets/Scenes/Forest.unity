@@ -183,6 +183,25 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ba25334269d09e4caa588d9d4f384f5, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &109203091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1415249092928436, guid: 4b26b6bc5e98e65428f6348f1e708fa3,
+    type: 2}
+  m_PrefabInternal: {fileID: 552540030}
+--- !u!114 &109203092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 109203091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29935c6e8d62c7d49b31a5ba50bc221d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 326451462}
+  LaserStart: {fileID: 0}
+  LaserEnd: {fileID: 0}
 --- !u!1001 &159530271
 Prefab:
   m_ObjectHideFlags: 0
@@ -226,7 +245,8 @@ Prefab:
       propertyPath: m_Name
       value: GhostTiger (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566085b8ad074564da1569b118d8fe1a, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &232502411
@@ -601,7 +621,8 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 326451462}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114443014459981106, guid: 4b26b6bc5e98e65428f6348f1e708fa3, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 4b26b6bc5e98e65428f6348f1e708fa3, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &608887538
@@ -647,7 +668,8 @@ Prefab:
       propertyPath: m_Name
       value: GhostTiger (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566085b8ad074564da1569b118d8fe1a, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &723953960
@@ -836,7 +858,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566085b8ad074564da1569b118d8fe1a, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1376954329
@@ -882,7 +905,8 @@ Prefab:
       propertyPath: m_Name
       value: GhostTiger (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566085b8ad074564da1569b118d8fe1a, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1733990781
@@ -984,6 +1008,7 @@ Prefab:
       propertyPath: m_Name
       value: GhostTiger (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 566085b8ad074564da1569b118d8fe1a, type: 2}
   m_IsPrefabAsset: 0

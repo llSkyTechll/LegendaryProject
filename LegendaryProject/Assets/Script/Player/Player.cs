@@ -11,6 +11,8 @@ public class Player : Character
     CharacterController controller;
     MouvementCamera sceneCamera;
     private CameraFocus cameraFocus;
+    Armor playerArmor;
+    public int damageReduction = 0;
     //Rigidbody rbd;
     //AudioSource audioSource;
     private Animator animator;
@@ -27,7 +29,12 @@ public class Player : Character
         SetLife(100);
         health = GetComponent<Health>();
         soundplayer = GetComponent<AudioSource>();
-        animator = GetComponentInChildren<Animator>();
+        playerArmor = GetComponentInChildren<Armor>();
+        if (playerArmor != null)
+        {
+            damageReduction = playerArmor.damageBlocked;
+        }
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -38,7 +45,7 @@ public class Player : Character
             gameObject.GetComponent<Character>().Die();
         }
         Footsteps();
-        if (Input.GetButtonDown("Interact") )
+        if (Input.GetButtonDown("Interact"))
         {
             if (Input.GetButtonDown("Interact") && focus != null)
             {
@@ -59,7 +66,7 @@ public class Player : Character
                 }
             }
         }
-        
+
 
     }
 
@@ -79,31 +86,36 @@ public class Player : Character
 
     public override void OnDamage(int damage)
     {
-        health.TakeDamage(damage);
+        damage -= damageReduction;
+        if (damage > 0)
+        {
+            health.TakeDamage(damage);
+        }
+
     }
 
     public override void Footsteps()
     {
-        if(controller.velocity.magnitude > 0.5f && controller.velocity.magnitude < 5f && soundplayer.isPlaying == false && GetComponent<movementplayer>().isGrounded)
+        if (controller.velocity.magnitude > 0.5f && controller.velocity.magnitude < 5f && soundplayer.isPlaying == false && GetComponent<movementplayer>().isGrounded)
         {
             soundplayer.clip = step;
             soundplayer.pitch = Random.Range(0.8f, 1);
             soundplayer.volume = Random.Range(0.8f, 1.1f);
             soundplayer.Play();
         }
-        else if(soundplayer.isPlaying == false && controller.velocity.magnitude > 5f && GetComponent<movementplayer>().isGrounded)
+        else if (soundplayer.isPlaying == false && controller.velocity.magnitude > 5f && GetComponent<movementplayer>().isGrounded)
         {
             soundplayer.clip = step;
             soundplayer.pitch = Random.Range(1.3f, 1.5f);
             soundplayer.volume = Random.Range(0.8f, 1.1f);
             soundplayer.Play();
         }
-     }
-     void SetFocus(Interactable newFocus)
+    }
+    void SetFocus(Interactable newFocus)
     {
         cameraFocus = newFocus.GetComponentInChildren<CameraFocus>();
         focus = newFocus;
-        if (cameraFocus!=null)
+        if (cameraFocus != null)
         {
             sceneCamera.ChangeFocus(cameraFocus.transform);
         }
@@ -111,8 +123,8 @@ public class Player : Character
         {
             sceneCamera.ChangeFocus(newFocus.transform);
         }
-        
+
     }
-        
+
 }
 
