@@ -830,10 +830,10 @@ RectTransform:
   m_Father: {fileID: 627970879}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -216, y: 0}
-  m_SizeDelta: {x: -592.45, y: -232.6}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -293, y: 0}
+  m_SizeDelta: {x: 369.53998, y: 306.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &223407217
 MonoBehaviour:
@@ -1193,6 +1193,10 @@ MonoBehaviour:
   description: Simple sword used a weapon
   icon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
   pickedUp: 0
+  equipped: 0
+  weapon: {fileID: 0}
+  weaponManager: {fileID: 0}
+  playersWeapon: 0
 --- !u!65 &320503313
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1200,7 +1204,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 320503311}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.6540892, y: 0.24278998, z: 4.5186825}
@@ -2934,7 +2938,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -218, y: 164}
+  m_AnchoredPosition: {x: -293, y: 167.7}
   m_SizeDelta: {x: 150.1, y: 28.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713668760
@@ -3720,7 +3724,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -218, y: 0.000005722}
+  m_AnchoredPosition: {x: -294, y: 2.05}
   m_SizeDelta: {x: 369.54, y: 302.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1039920132
@@ -7507,10 +7511,10 @@ RectTransform:
   m_Father: {fileID: 223407216}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000015258789}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000030179935, y: 0}
+  m_SizeDelta: {x: 368.6, y: 308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115466249
 MonoBehaviour:

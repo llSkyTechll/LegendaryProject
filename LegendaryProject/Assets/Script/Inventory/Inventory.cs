@@ -1,77 +1,72 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-    public bool inventoryEnabled;
-    public GameObject inventory;
+    [SerializeField] List<Item> items;
+    [SerializeField] Transform itemsParent;
+    [SerializeField] ItemSlot[] itemSlots;
 
-    private int allSlots;
-    private GameObject[] slot;
+    public event Action<Item> OnItemRightClickedEvent;
 
-    public GameObject slotHolder;
-    void Start()
-    {
-        allSlots = 30;
-        slot = new GameObject[allSlots];
-
-        for (int i = 0; i < allSlots; i++)
-        {
-            slot[i] = slotHolder.transform.GetChild(i).gameObject;
-            if (slot[i].GetComponent<Slots>().item == null)
-            {
-                slot[i].GetComponent<Slots>().empty = true;
-            }
-        }
-    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.Escape))
         {
-            inventoryEnabled = !inventoryEnabled;
-        }
-        if (inventoryEnabled == true)
-        {
-            inventory.SetActive(true);
-        }
-        else
-        {
-            inventory.SetActive(false);
+            gameObject.SetActive(!gameObject.activeSelf);
         }
     }
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if (other.tag == "Item")
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            GameObject itemPickedUp = other.gameObject;
-            Items item = itemPickedUp.GetComponent<Items>();
-
-            AddItem(itemPickedUp,item.ID, item.type, item.description, item.icon);
+            itemSlots[i].OnRightClickEvent += OnItemRightClickedEvent;
         }
     }
-    void AddItem(GameObject ItemObject,int ItemId, string ItemType, string ItemDescription, Sprite ItemIcon)
+    private void OnValidate()
     {
-        for (int i = 0; i < allSlots; i++)
+        if (itemsParent !=null)
+            itemSlots = itemsParent.GetComponentsInChildren<ItemSlot>();
+        
+        RefreshUI();
+    }
+
+    private void RefreshUI()
+    {
+        int i = 0;
+        for (; i < items.Count && i < itemSlots.Length; i++)
         {
-            if (slot[i].GetComponent<Slots>().empty)
-            {
-                //add item to slot
-                ItemObject.GetComponent<Items>().pickedUp = true;
-
-                slot[i].GetComponent<Slots>().item = ItemObject;
-                slot[i].GetComponent<Slots>().icon = ItemIcon;
-                slot[i].GetComponent<Slots>().type = ItemType;
-                slot[i].GetComponent<Slots>().description = ItemDescription;
-                slot[i].GetComponent<Slots>().ID = ItemId;
-
-                ItemObject.transform.parent = slot[i].transform;
-                ItemObject.SetActive(false);
-
-                slot[i].GetComponent<Slots>().UpdateSlot();
-                slot[i].GetComponent<Slots>().empty = false;
-            }
-            return;
+            itemSlots[i].Item = items[i];
         }
+        for (; i < itemSlots.Length; i++)
+        {
+            itemSlots[i].Item = null;
+        }
+    }
+
+    public bool AddItem(Item item)
+    {
+        if (IsFull())
+        {
+            return false;
+        }
+        items.Add(item);
+        RefreshUI();
+        return true;
+    }
+    public bool RemoveItem(Item item)
+    {
+        if (items.Remove(item))
+        {
+            RefreshUI();
+            return true;
+        }
+        return false;
+    }
+    public bool IsFull()
+    {
+        return items.Count >= itemSlots.Length;
     }
 }
