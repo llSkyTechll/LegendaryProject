@@ -6,94 +6,50 @@ using UnityEngine.AI;
 public abstract class EnemyAI : Character
 {
 
-    public float lookRadius = 25f;
+    protected float lookRadius = 25f;
 
-    Transform target;
-    NavMeshAgent agent;
+    protected Transform target;
+    protected NavMeshAgent agent;
 
-    private float attackSpeed = 1f;
-    private float attackCooldown = 0f;
+    protected float attackSpeed = 1f;
+    protected float attackCooldown = 0f;
 
     protected GameObject player;
     protected Animator animator;
-    private Armor playerArmor;
-    private Health playerHealth;
+    protected Armor playerArmor;
+    protected Health playerHealth;
     public AudioClip attack;
 
-    private int damageReduction = 0;
-    protected string animationRunName="Run";
-    // Use this for initialization
+    protected int damageReduction = 0;
+    protected string animationRunName = "Run";
+    protected string animationAttackName = "Skill2";
+    protected string animationDeadName = "Dead";
+    protected string animationIdleName = "Idle";
+
 
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        target = PlayerManager.instance.player.transform;
-        animator = GetComponent<Animator>();
-        health = GetComponent<Health>();
-        player = PlayerManager.instance.player;
-        soundplayer = GetComponent<AudioSource>();
-        playerArmor = player.GetComponentInChildren<Armor>();
-        if (playerArmor != null)
-        {
-            damageReduction = playerArmor.damageBlocked;
-        }
-        playerHealth = player.GetComponent<Health>();
-        animationRunName = GetAnimationRunName();
+        OnStart();
     }
+    protected abstract void OnStart();
 
-    // Update is called once per frame
-    protected void OnUpdate()
-    {
-        print(agent);
-        Footsteps();
-        attackCooldown -= Time.deltaTime;
-        if (health.currentHealth <= 0)
-        {
-            animator.Play("Dead");
-            gameObject.GetComponent<Character>().Die();
-        }
-        else
-        {
-            float distance = Vector3.Distance(target.position, transform.position);
 
-            if (distance <= lookRadius && distance > agent.stoppingDistance)
-            {
-                agent.SetDestination(target.position);
-                if (attackCooldown <= 0f && agent.velocity.magnitude / agent.speed != 0)
-                {
-                    animator.Play(animationRunName);
-
-                }
-
-                FaceTarget();
-            }
-            else if (distance <= agent.stoppingDistance)
-            {
-                if (attackCooldown <= 0f)
-                {
-                    animator.Play("Skill2");
-                    DealDamage();
-                    //player.GetComponent<Health>().TakeDamage(10);
-                    attackCooldown = 2f / attackSpeed;
-                }
-                FaceTarget();
-            }
-            else if (distance > lookRadius && (agent.velocity.magnitude / agent.speed) == 0)
-            {
-                animator.Play("Idle");
-            }
-        }
-    }
     protected abstract string GetAnimationRunName();
-    
+    protected abstract string GetAnimationAttackName();
+    protected abstract string GetAnimationDeadName();
+    protected abstract string GetAnimationIdleName();
+    protected abstract float SetlookRadius();
+
+
     void Update()
     {
         OnUpdate();
-        
-    }
 
-    void FaceTarget()
+    }
+    protected abstract void OnUpdate();
+    
+    protected void FaceTarget()
     {
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
@@ -112,7 +68,7 @@ public abstract class EnemyAI : Character
         Destroy(gameObject, 10);
     }
 
-    void DealDamage()
+    protected void DealDamage()
     {
         int damage = 10;
         damage = damage - damageReduction;
