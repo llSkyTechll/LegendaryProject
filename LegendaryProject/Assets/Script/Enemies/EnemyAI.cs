@@ -97,18 +97,11 @@ public abstract class EnemyAI : Character
     public override void Footsteps()
     {
         if (agent.velocity.magnitude > 2 && soundplayer.isPlaying == false)
-        if (agent.velocity.magnitude > 2f)
         {
-            if (soundplayer.isPlaying == false)
-            {
-
-
-                soundplayer.clip = step;
-                soundplayer.pitch = Random.Range(0.8f, 1);
-                soundplayer.volume = Random.Range(0.8f, 1.1f);
-                soundplayer.Play();
-
-
+            soundplayer.clip = step;
+            soundplayer.pitch = Random.Range(0.8f, 1);
+            soundplayer.volume = Random.Range(0.8f, 1.1f);
+            soundplayer.Play();
         }
     }
 }

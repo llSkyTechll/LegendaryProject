@@ -39,8 +39,8 @@ public class GhostTiger : EnemyAI {
     {       
         rbd = GetComponent<Rigidbody>();
         //audioSource = GameObject.FindGameObjectWithTag("SoundPlayer").GetComponent<AudioSource>();
-        SetLife(100);      
-        
+        SetLife(100);
+        attack = attackSound;
     }
 
     protected override void OnUpdate()

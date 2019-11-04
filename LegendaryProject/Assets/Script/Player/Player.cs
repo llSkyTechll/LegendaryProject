@@ -34,7 +34,7 @@ public class Player : Character
         {
             damageReduction = playerArmor.damageBlocked;
         }
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
