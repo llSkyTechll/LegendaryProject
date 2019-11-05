@@ -141,6 +141,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &170282971
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.182
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -4.1722
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114842182644139380, guid: f5621564e85d887408939d0c0185def8,
+        type: 2}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1687722494}
+    - target: {fileID: 1863085422227850, guid: f5621564e85d887408939d0c0185def8, type: 2}
+      propertyPath: m_Name
+      value: MissGohan
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f5621564e85d887408939d0c0185def8, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &234986164
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,53 +369,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &889814062
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.07
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.182
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -4.1722
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4572545585607110, guid: f5621564e85d887408939d0c0185def8, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114842182644139380, guid: f5621564e85d887408939d0c0185def8,
-        type: 2}
-      propertyPath: camera
-      value: 
-      objectReference: {fileID: 1687722494}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f5621564e85d887408939d0c0185def8, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &1075494547
 GameObject:
   m_ObjectHideFlags: 0
