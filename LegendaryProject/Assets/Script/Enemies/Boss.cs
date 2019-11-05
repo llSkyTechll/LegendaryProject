@@ -41,10 +41,10 @@ public class Boss : EnemyAI
     float TimeBeforeAction = 5f;
     float TimeBeforeShoot = 4f;
 
-    [System.Obsolete]
     protected override void OnStart()
     {
         SetLife(300);
+
 
        // bossCollider = GetComponentInChildren<BoxCollider>();
         jumpParticle = GetComponentInChildren<ParticleSystem>();
@@ -57,23 +57,21 @@ public class Boss : EnemyAI
 
         startPoint = PositionManager.instance.LaserStart.transform;
         endPoint = PositionManager.instance.LaserEnd.transform;
-
         laser = GameObject.FindGameObjectWithTag("Laser");
-
         laserLine = laser.GetComponent<LineRenderer>();
-        laserLine.SetWidth(0.2f, 0.2f);
         laser.SetActive(false);
+
     }
 
 
     protected override void OnUpdate()
     {
+  
         Footsteps();
         attackCooldown -= Time.deltaTime;
         TimeBeforeAction -= Time.deltaTime;
         if (health.currentHealth <= 0)
         {
-            print("dead");
             animator.Play(animationDeadName);
             gameObject.GetComponent<Character>().Die();
 
@@ -87,6 +85,7 @@ public class Boss : EnemyAI
                 int RandomDistanceAttack = randomMove.Next(0, 2);
                 if (TimeBeforeAction <= 0)
                 {
+
                     ResetActionPossible();
                     if (RandomDistanceAttack == 0)
                     {
@@ -150,7 +149,6 @@ public class Boss : EnemyAI
 
     void AttackTail()
     {
-        print(animationAttackName);
         animator.Play(animationAttackName);
         DealDamage(10);
         attackCooldown = 2f / attackSpeed;
@@ -160,7 +158,6 @@ public class Boss : EnemyAI
         agent.SetDestination(transform.position);
         TimeBeforeShoot -= Time.deltaTime;
         laser.SetActive(true);
-        print(animationIdleName);
         Aim = true;
         endPoint.position = target.position;
         laserLine.SetPosition(0, startPoint.position);
@@ -169,18 +166,15 @@ public class Boss : EnemyAI
     }
     void AttackLaser()
     {
-        print(animationAttackName);
         TimeBeforeShoot = 4f;
         RaycastHit hit;
         animator.Play(animationAttackName);
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            print("set");
             if (hit.collider)
             {
                 laserLine.SetPosition(1, hit.point);
                 DealDamage(5);
-                print("hit");
             }
         }
 
@@ -190,14 +184,12 @@ public class Boss : EnemyAI
     void AttackJump()
     {
         jumpParticle.Play();
-        print(animationAttackName);
         animator.Play(animationAttackName);
         DealDamage(15);
         attackCooldown = 2f / attackSpeed;
     }
     void Run()
     {
-        print(animationRunName);
         agent.SetDestination(target.position);
         if (attackCooldown <= 0f && agent.velocity.magnitude / agent.speed != 0)
         {
