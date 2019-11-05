@@ -1811,7 +1811,7 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138617763555924}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 6f012b33467426c43a1c019d350c0a03, type: 3}
   m_Controller: {fileID: 9100000, guid: a1af1a994ce0d594ba0db9c2974e7700, type: 2}
   m_CullingMode: 1

@@ -40,13 +40,14 @@ public class Boss : EnemyAI
     bool Moving = false;
     float TimeBeforeAction = 5f;
     float TimeBeforeShoot = 4f;
+    bool isDead = false;
 
     protected override void OnStart()
     {
         SetLife(300);
 
 
-       // bossCollider = GetComponentInChildren<BoxCollider>();
+        // bossCollider = GetComponentInChildren<BoxCollider>();
         jumpParticle = GetComponentInChildren<ParticleSystem>();
         //rdbPlayer = player.GetComponent<Rigidbody>();
         animationRunName = GetAnimationRunName();
@@ -66,16 +67,18 @@ public class Boss : EnemyAI
 
     protected override void OnUpdate()
     {
-  
+
         Footsteps();
         attackCooldown -= Time.deltaTime;
         TimeBeforeAction -= Time.deltaTime;
         if (health.currentHealth <= 0)
         {
-            animator.Play(animationDeadName);
-            gameObject.GetComponent<Character>().Die();
-
-            SceneManager.LoadScene("Win");
+            if (isDead == false)
+            {
+                animator.Play(animationDeadName);
+                isDead = true;
+                gameObject.GetComponent<Character>().Die();
+            }
         }
         else
         {
@@ -124,6 +127,7 @@ public class Boss : EnemyAI
             else if (distance <= agent.stoppingDistance)
             {
                 int RandomCloseAttack = randomMove.Next(0, 2);
+                laser.SetActive(false);
                 if (attackCooldown <= 0f)
                 {
                     if (RandomCloseAttack == 0)
@@ -142,9 +146,15 @@ public class Boss : EnemyAI
             else if (distance > lookRadius && (agent.velocity.magnitude / agent.speed) == 0)
             {
                 animator.Play(animationIdleName);
+                laser.SetActive(false);
             }
         }
 
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.LoadScene("Win");
     }
 
     void AttackTail()
@@ -204,6 +214,6 @@ public class Boss : EnemyAI
         Aim = false;
         laser.SetActive(false);
     }
-   
+
 
 }
