@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
     }
     public void GainHealth(int heal)
     {
-        if (currentHealth < maxHealth)
+        if (currentHealth < maxHealth && currentHealth>0)
         {
             currentHealth += heal;
 

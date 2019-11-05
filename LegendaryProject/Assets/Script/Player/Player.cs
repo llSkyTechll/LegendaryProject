@@ -108,6 +108,7 @@ public class Player : Character
 
     public override void OnDamage(int damage)
     {
+        print(damage);
         damage -= damageReduction;
         if (damage > 0)
         {

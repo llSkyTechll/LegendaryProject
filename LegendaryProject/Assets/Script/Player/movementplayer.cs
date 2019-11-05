@@ -88,13 +88,7 @@ public class movementplayer : MonoBehaviour {
             !GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetIsDead();
     }
 
-    void LateUpdate()
-    {
-        if (isGrounded && movementY.y <0)
-        {
-            movementY.y = 0;
-        }
-    }
+    
 
     void CheckIfInAir()
     {
