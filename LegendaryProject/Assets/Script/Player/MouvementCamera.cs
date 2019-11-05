@@ -11,7 +11,7 @@ public class MouvementCamera : MonoBehaviour {
 
     //private Camera cam;
 
-    private const float Y_ANGLE_MIN = 0.0f;
+    private const float Y_ANGLE_MIN = 10.0f;
     private const float Y_ANGLE_MAX = 50.0f;
 
 
