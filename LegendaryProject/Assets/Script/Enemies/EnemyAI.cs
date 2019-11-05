@@ -19,6 +19,7 @@ public abstract class EnemyAI : Character
     protected Armor playerArmor;
     protected Health playerHealth;
     protected AudioClip attack;
+    protected AudioClip deathSound;
 
     protected int damageReduction = 0;
     protected string animationRunName = "Run";
@@ -78,15 +79,6 @@ public abstract class EnemyAI : Character
     protected void DealDamage(int damage)
     {
         player.GetComponent<Player>().OnDamage(damage);
-        AttackSound();
-    }
-
-    void AttackSound()
-    {
-        soundplayer.clip = attack;
-        soundplayer.pitch = Random.Range(0.8f, 1.2f);
-        soundplayer.volume = Random.Range(0.8f, 1.1f);
-        soundplayer.Play();
     }
 
     public override void OnDamage(int damage)
@@ -98,10 +90,25 @@ public abstract class EnemyAI : Character
     {
         if (agent.velocity.magnitude > 2 && soundplayer.isPlaying == false)
         {
-            soundplayer.clip = step;
-            soundplayer.pitch = Random.Range(0.8f, 1);
-            soundplayer.volume = Random.Range(0.8f, 1.1f);
+            PlayRepeatingSound(step);
+        }
+    }
+
+    protected void PlayRepeatingSound(AudioClip clip, float pitchOffset = 0, float volumeOffset = 0)
+    {
+        if (!soundplayer.isPlaying)
+        {
+            soundplayer.clip = clip;
+            soundplayer.pitch = UnityEngine.Random.Range(0.8f + pitchOffset, 1.2f + pitchOffset);
+            soundplayer.volume = UnityEngine.Random.Range(0.8f + volumeOffset, 1.1f + volumeOffset);
             soundplayer.Play();
         }
+    }
+
+    protected void PlaySound(AudioClip clip, float pitchOffset = 0, float volumeOffset = 0)
+    {
+        soundplayer.pitch = UnityEngine.Random.Range(0.8f + pitchOffset, 1.2f + pitchOffset);
+        soundplayer.volume = UnityEngine.Random.Range(0.8f + volumeOffset, 1.1f + volumeOffset);
+        soundplayer.PlayOneShot(clip);
     }
 }
