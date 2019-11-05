@@ -504,6 +504,26 @@ Prefab:
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 114869788475138936, guid: f85e3056e6d31594d8f370d05da256ff,
+        type: 2}
+      propertyPath: laserSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ddb08ea169839de4396dda413a5d1943, type: 3}
+    - target: {fileID: 114869788475138936, guid: f85e3056e6d31594d8f370d05da256ff,
+        type: 2}
+      propertyPath: charge
+      value: 
+      objectReference: {fileID: 8300000, guid: 472db135bba44084babc0d887d834845, type: 3}
+    - target: {fileID: 114869788475138936, guid: f85e3056e6d31594d8f370d05da256ff,
+        type: 2}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d13cdc949585dc84c832d0bc084451a5, type: 3}
+    - target: {fileID: 114869788475138936, guid: f85e3056e6d31594d8f370d05da256ff,
+        type: 2}
+      propertyPath: step
+      value: 
+      objectReference: {fileID: 8300000, guid: c92b3d64c08264d4d9db20baca24c4e8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f85e3056e6d31594d8f370d05da256ff, type: 2}
   m_IsPrefabAsset: 0

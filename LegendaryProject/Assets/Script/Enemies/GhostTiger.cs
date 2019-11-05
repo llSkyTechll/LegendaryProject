@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class GhostTiger : EnemyAI {
     public float speed = 1;
     protected Rigidbody rbd;
-    AudioSource audioSource;
 
     public AudioClip attackSound;
 
@@ -73,6 +72,7 @@ public class GhostTiger : EnemyAI {
                 {
                     animator.Play("Skill2");
                     DealDamage(10);
+                    PlaySound(attackSound);
                     //player.GetComponent<Health>().TakeDamage(10);
                     attackCooldown = 2f / attackSpeed;
                 }

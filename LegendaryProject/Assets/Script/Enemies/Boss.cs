@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,6 +16,11 @@ public class Boss : EnemyAI
     //Rigidbody rdbPlayer;
     //BoxCollider bossCollider;
     ParticleSystem jumpParticle;
+
+    public AudioClip attackSound;
+    public AudioClip charge;
+    public AudioClip laserSound;
+    public AudioClip death;
 
     protected override string GetAnimationAttackName()
     {
@@ -40,7 +46,6 @@ public class Boss : EnemyAI
     bool Moving = false;
     float TimeBeforeAction = 5f;
     float TimeBeforeShoot = 4f;
-    bool isDead = false;
 
     protected override void OnStart()
     {
@@ -62,6 +67,7 @@ public class Boss : EnemyAI
         laserLine = laser.GetComponent<LineRenderer>();
         laser.SetActive(false);
 
+        attack = attackSound;
     }
 
 
@@ -73,10 +79,9 @@ public class Boss : EnemyAI
         TimeBeforeAction -= Time.deltaTime;
         if (health.currentHealth <= 0)
         {
-            if (isDead == false)
+            if (!isDead)
             {
-                animator.Play(animationDeadName);
-                isDead = true;
+                //animator.Play(animationDeadName);
                 gameObject.GetComponent<Character>().Die();
             }
         }
@@ -176,12 +181,14 @@ public class Boss : EnemyAI
         laserLine.SetPosition(0, startPoint.position);
         laserLine.SetPosition(1, endPoint.position);
         animator.Play(animationIdleName);
+        PlayRepeatingSound(charge,0,-0.3f);
     }
     void AttackLaser()
     {
         TimeBeforeShoot = 4f;
         RaycastHit hit;
         animator.Play(animationAttackName);
+        PlaySound(laserSound);
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
             if (hit.collider)
@@ -193,13 +200,13 @@ public class Boss : EnemyAI
 
     }
 
-
     void AttackJump()
     {
         jumpParticle.Play();
         animator.Play(animationAttackName);
         DealDamage(15);
         attackCooldown = 2f / attackSpeed;
+        PlaySound(step,-0.5f);
     }
     void Run()
     {
