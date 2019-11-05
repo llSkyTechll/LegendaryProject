@@ -26,4 +26,14 @@ public class Health : MonoBehaviour
             GetComponent<Character>().Die();
         }
     }
+    public void GainHealth(int heal)
+    {
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += heal;
+
+            float currentHealthPct = (float)currentHealth / (float)maxHealth;
+            OnHealthPctChanged(currentHealthPct);
+        }
+    }
 }

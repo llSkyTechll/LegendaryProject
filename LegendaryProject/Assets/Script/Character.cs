@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Character : MonoBehaviour, Damageable
 {
     protected Health health;
-    public int lifeTotal = 1;
+    protected int lifeTotal = 1;
     protected AudioSource soundplayer;
     public AudioClip step;
 

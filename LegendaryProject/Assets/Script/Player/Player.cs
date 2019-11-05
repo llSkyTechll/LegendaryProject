@@ -17,6 +17,9 @@ public class Player : Character
     //AudioSource audioSource;
     private Animator animator;
     private bool isDead;
+    private int healthRegen = 1;
+    private float healthRegenCD = 0f;
+
     // Use this for initialization
     void Start()
     {
@@ -45,6 +48,7 @@ public class Player : Character
             gameObject.GetComponent<Character>().Die();
         }
         Footsteps();
+        HealthRegen();
         if (Input.GetButtonDown("Interact"))
         {
             if (Input.GetButtonDown("Interact") && focus != null)
@@ -68,6 +72,19 @@ public class Player : Character
         }
 
 
+    }
+
+    public void HealthRegen()
+    {
+        if (healthRegenCD <= 0f)
+        {
+            health.GainHealth(healthRegen);
+            healthRegenCD = 2f;
+        }
+        else
+        {
+            healthRegenCD -= Time.deltaTime;
+        }
     }
 
     public override void Die()
