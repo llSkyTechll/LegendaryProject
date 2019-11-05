@@ -13,7 +13,7 @@ public class Player : Character
     private CameraFocus cameraFocus;
     Armor playerArmor;
     public int damageReduction = 0;
-    //Rigidbody rbd;
+   // Rigidbody rbd;
     //AudioSource audioSource;
     private Animator animator;
     private bool isDead;
