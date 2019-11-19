@@ -20,6 +20,7 @@ public abstract class EnemyAI : Character
     protected Health playerHealth;
     protected AudioClip attack;
     protected AudioClip deathSound;
+    public AudioClip idleSound;
 
     protected int damageReduction = 0;
     protected string animationRunName = "Run";
@@ -37,6 +38,7 @@ public abstract class EnemyAI : Character
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
         target = PositionManager.instance.player.transform;
+        SetLife(MaxLife);
         OnStart();
 
     }
@@ -48,6 +50,7 @@ public abstract class EnemyAI : Character
     protected abstract string GetAnimationDeadName();
     protected abstract string GetAnimationIdleName();
     protected abstract float SetlookRadius();
+    protected abstract int SetMaxLife();
 
 
     void Update()
@@ -99,21 +102,5 @@ public abstract class EnemyAI : Character
         }
     }
 
-    protected void PlayRepeatingSound(AudioClip clip, float pitchOffset = 0, float volumeOffset = 0)
-    {
-        if (!soundplayer.isPlaying)
-        {
-            soundplayer.clip = clip;
-            soundplayer.pitch = UnityEngine.Random.Range(0.8f + pitchOffset, 1.2f + pitchOffset);
-            soundplayer.volume = UnityEngine.Random.Range(0.8f + volumeOffset, 1.1f + volumeOffset);
-            soundplayer.Play();
-        }
-    }
-
-    protected void PlaySound(AudioClip clip, float pitchOffset = 0, float volumeOffset = 0)
-    {
-        soundplayer.pitch = UnityEngine.Random.Range(0.8f + pitchOffset, 1.2f + pitchOffset);
-        soundplayer.volume = UnityEngine.Random.Range(0.8f + volumeOffset, 1.1f + volumeOffset);
-        soundplayer.PlayOneShot(clip);
-    }
+    
 }

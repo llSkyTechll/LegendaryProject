@@ -318,7 +318,7 @@ MonoBehaviour:
   lookAt: {fileID: 1985475455}
   camTransform: {fileID: 0}
   PlayerNotFocused: 0
-  sensivityX: 10
+  currentX: 0
 --- !u!81 &319776931
 AudioListener:
   m_ObjectHideFlags: 0
@@ -532,6 +532,53 @@ MonoBehaviour:
   player: {fileID: 1985475454}
   LaserStart: {fileID: 1621441179}
   LaserEnd: {fileID: 1374802272}
+--- !u!1001 &1287751840
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4282448810761314, guid: 78357f6cac010ee43bff7c5c5e35e424, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282448810761314, guid: 78357f6cac010ee43bff7c5c5e35e424, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282448810761314, guid: 78357f6cac010ee43bff7c5c5e35e424, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282448810761314, guid: 78357f6cac010ee43bff7c5c5e35e424, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282448810761314, guid: 78357f6cac010ee43bff7c5c5e35e424, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282448810761314, guid: 78357f6cac010ee43bff7c5c5e35e424, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282448810761314, guid: 78357f6cac010ee43bff7c5c5e35e424, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4282448810761314, guid: 78357f6cac010ee43bff7c5c5e35e424, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114208935390649922, guid: 78357f6cac010ee43bff7c5c5e35e424,
+        type: 2}
+      propertyPath: SurroundSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 30bb5e30267de464eb03f6c5d0fa0ce7, type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 78357f6cac010ee43bff7c5c5e35e424, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1374802272 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1771073630755934, guid: f85e3056e6d31594d8f370d05da256ff,
@@ -838,7 +885,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4937984772957054, guid: 8ba25334269d09e4caa588d9d4f384f5, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 187.8
+      value: 353.6
       objectReference: {fileID: 0}
     - target: {fileID: 4937984772957054, guid: 8ba25334269d09e4caa588d9d4f384f5, type: 2}
       propertyPath: m_LocalRotation.x
@@ -870,6 +917,16 @@ Prefab:
       propertyPath: equipmentPanel
       value: 
       objectReference: {fileID: 1079280042}
+    - target: {fileID: 114594680125651436, guid: 8ba25334269d09e4caa588d9d4f384f5,
+        type: 2}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 209138674}
+    - target: {fileID: 114276041549283858, guid: 8ba25334269d09e4caa588d9d4f384f5,
+        type: 2}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 209138674}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ba25334269d09e4caa588d9d4f384f5, type: 2}
   m_IsPrefabAsset: 0

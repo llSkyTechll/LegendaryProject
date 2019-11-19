@@ -6,9 +6,8 @@ public class movementplayer : MonoBehaviour {
     private CharacterController characterController;
     private Vector3 movementY = Vector3.zero;
     private Vector3 movementXZ= Vector3.zero;
-    private float currentX = 0.0f;
     private Animator animator;
-    private float sensivity;
+    private MouvementCamera cam;
     public float distanceGround;
     public bool isGrounded = false;
     public float SPEED = 300;
@@ -17,7 +16,7 @@ public class movementplayer : MonoBehaviour {
         characterController = GetComponent<CharacterController>();
         distanceGround = characterController.bounds.extents.y;
         animator = GetComponentInChildren<Animator>();
-        sensivity = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().sensivityX;
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>();
     }
 	
 	// Update is called once per frame
@@ -26,7 +25,7 @@ public class movementplayer : MonoBehaviour {
         CheckIfInAir();
         if (CanMove())
         {
-            currentX += Input.GetAxis("Mouse X") * sensivity;
+            
             if (isGrounded)
             {
                 if (Input.GetButtonDown("Jump"))
@@ -44,7 +43,7 @@ public class movementplayer : MonoBehaviour {
             if (movementXZ.x != 0 || movementXZ.z != 0)
             {
                 animator.SetBool("Walking", true);
-                Quaternion rotation = Quaternion.Euler(0, currentX, 0);
+                Quaternion rotation = Quaternion.Euler(0, cam.currentX, 0);
                 transform.rotation = rotation;
             }
             else
@@ -75,6 +74,7 @@ public class movementplayer : MonoBehaviour {
         }
         else
         {
+            characterController.Move(Vector3.zero);
             animator.SetBool("Walking", false);
             animator.SetBool("Running", false);
         }

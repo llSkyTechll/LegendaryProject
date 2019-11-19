@@ -1743,7 +1743,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.0137482, y: 3.8762207, z: 3.008377}
+  m_Size: {x: 2.0137482, y: 3.8762207, z: 1}
   m_Center: {x: 0.08370209, y: 1.4381104, z: -0.3562088}
 --- !u!82 &82354995866548862
 AudioSource:
@@ -1984,7 +1984,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   step: {fileID: 8300000, guid: c92b3d64c08264d4d9db20baca24c4e8, type: 3}
+  idleSound: {fileID: 8300000, guid: cc610a1947cf1d344ad1278859f22892, type: 3}
   attackSound: {fileID: 8300000, guid: d13cdc949585dc84c832d0bc084451a5, type: 3}
+  sweepSound: {fileID: 8300000, guid: 80c05914f89d1e84fb49712b8f267b4a, type: 3}
   charge: {fileID: 8300000, guid: 472db135bba44084babc0d887d834845, type: 3}
   laserSound: {fileID: 8300000, guid: ddb08ea169839de4396dda413a5d1943, type: 3}
 --- !u!114 &114877835933412668

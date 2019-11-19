@@ -13,11 +13,10 @@ public class Boss : EnemyAI
 
     private LineRenderer laserLine;
     private GameObject laser;
-    //Rigidbody rdbPlayer;
-    //BoxCollider bossCollider;
     ParticleSystem jumpParticle;
 
     public AudioClip attackSound;
+    public AudioClip sweepSound;
     public AudioClip charge;
     public AudioClip laserSound;
     AudioClip death;
@@ -42,6 +41,10 @@ public class Boss : EnemyAI
     {
         return 50f;
     }
+    protected override int SetMaxLife()
+    {
+        return 300;
+    }
     bool Aim = false;
     bool Moving = false;
     float TimeBeforeAction = 5f;
@@ -49,7 +52,7 @@ public class Boss : EnemyAI
 
     protected override void OnStart()
     {
-        SetLife(300);
+        MaxLife = SetMaxLife();
 
 
         // bossCollider = GetComponentInChildren<BoxCollider>();
@@ -151,6 +154,7 @@ public class Boss : EnemyAI
             else if (distance > lookRadius && (agent.velocity.magnitude / agent.speed) == 0)
             {
                 animator.Play(animationIdleName);
+                PlayRepeatingSound(idleSound,-0.2f);
                 laser.SetActive(false);
             }
         }
@@ -168,6 +172,7 @@ public class Boss : EnemyAI
     void AttackTail()
     {
         animator.Play(animationAttackName);
+        PlaySound(sweepSound,-0.5f);
         DealDamage(10);
         attackCooldown = 2f / attackSpeed;
     }
@@ -181,7 +186,7 @@ public class Boss : EnemyAI
         laserLine.SetPosition(0, startPoint.position);
         laserLine.SetPosition(1, endPoint.position);
         animator.Play(animationIdleName);
-        PlayRepeatingSound(charge,0,-0.3f);
+        PlayRepeatingSound(charge,-0.6f,-0.69f);
     }
     void AttackLaser()
     {
@@ -197,7 +202,8 @@ public class Boss : EnemyAI
                 DealDamage(5);
             }
         }
-
+        Aim = false;
+        laserLine.enabled = false;
     }
 
     void AttackJump()
@@ -206,7 +212,7 @@ public class Boss : EnemyAI
         animator.Play(animationAttackName);
         DealDamage(15);
         attackCooldown = 2f / attackSpeed;
-        PlaySound(step,-0.5f);
+        PlaySound(step,-0.5f,2,1.2f);
     }
     void Run()
     {
@@ -223,7 +229,9 @@ public class Boss : EnemyAI
         Moving = false;
         Aim = false;
         laser.SetActive(false);
+        TimeBeforeShoot = 4f;
+
     }
 
-
+   
 }
