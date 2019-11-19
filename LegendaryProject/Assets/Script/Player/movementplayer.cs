@@ -83,7 +83,7 @@ public class movementplayer : MonoBehaviour {
 
     private static bool CanMove()
     {
-        return !GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().PlayerNotFocused &&
+        return !GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().PlayerNotFocused && !PauseMenu.gameIsPaused &&
             !GameObject.FindGameObjectWithTag("Inventory").GetComponentInChildren<KeyPressPanel>().GetInventoryIsOpen() &&
             !GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetIsDead();
     }

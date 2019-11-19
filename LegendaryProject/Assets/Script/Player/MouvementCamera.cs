@@ -44,7 +44,7 @@ public class MouvementCamera : MonoBehaviour {
 
     private bool CanMoveCamera()
     {
-        return !PlayerNotFocused &&
+        return !PlayerNotFocused && !PauseMenu.gameIsPaused &&
             !GameObject.FindGameObjectWithTag("Inventory").GetComponentInChildren<KeyPressPanel>().GetInventoryIsOpen() &&
             !GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetIsDead();
     }
