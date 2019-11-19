@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TextRotation : MonoBehaviour {
 
-    public Transform camera;
+    public Transform CamTransform;
 	// Use this for initialization
 	void Start () {
 		
@@ -12,6 +12,6 @@ public class TextRotation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.rotation = camera.rotation;
+        transform.rotation = CamTransform.rotation;
 	}
 }

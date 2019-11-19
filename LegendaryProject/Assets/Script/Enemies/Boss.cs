@@ -20,7 +20,7 @@ public class Boss : EnemyAI
     public AudioClip attackSound;
     public AudioClip charge;
     public AudioClip laserSound;
-    public AudioClip death;
+    AudioClip death;
 
     protected override string GetAnimationAttackName()
     {
@@ -81,8 +81,8 @@ public class Boss : EnemyAI
         {
             if (!isDead)
             {
-                //animator.Play(animationDeadName);
-                gameObject.GetComponent<Character>().Die();
+                animator.Play(animationDeadName);
+                Die();
             }
         }
         else
