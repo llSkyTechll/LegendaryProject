@@ -97,4 +97,9 @@ public class GhostTiger : EnemyAI {
     {
         return 10f;
     }
+
+    protected override string GetName()
+    {
+        return "GhostTiger";
+    }
 }

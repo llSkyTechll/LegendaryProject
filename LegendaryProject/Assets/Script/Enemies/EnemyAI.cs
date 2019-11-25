@@ -21,6 +21,7 @@ public abstract class EnemyAI : Character
     protected AudioClip attack;
     protected AudioClip deathSound;
     public AudioClip idleSound;
+    private QuestManager questManager;
 
     protected int damageReduction = 0;
     protected string animationRunName = "Run";
@@ -32,6 +33,7 @@ public abstract class EnemyAI : Character
 
     void Start()
     {
+        questManager = GameObject.FindObjectOfType<QuestManager>();
         player = PositionManager.instance.player;
         soundplayer = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
@@ -60,6 +62,8 @@ public abstract class EnemyAI : Character
     }
     protected abstract void OnUpdate();
 
+    protected abstract string GetName();
+
     protected void FaceTarget()
     {
         Vector3 direction = (target.position - transform.position).normalized;
@@ -78,6 +82,7 @@ public abstract class EnemyAI : Character
         if(!isDead)
         {
             isDead = true;
+            questManager.UpdateQuesting(GetName());
             animator.SetTrigger("Death");
             PlaySound(attack,-0.6f);
             Destroy(gameObject, 10);
