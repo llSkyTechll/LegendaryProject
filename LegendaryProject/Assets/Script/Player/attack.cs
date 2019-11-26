@@ -12,11 +12,15 @@ public class attack : MonoBehaviour {
     private float attackCooldown = 0f;
     private int minDamage = 5;
     private int maxDamage = 5;
+    private float cooldown = 0f;
+    public GameObject fireball;
+    private MouvementCamera cam;
 
     // Use this for initialization
     void Start () {
         animator = GetComponentInChildren<Animator>();
         equippedWeapon = GetComponentInChildren<Weapon>();
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>();
         if (equippedWeapon != null)
         {
             minDamage = equippedWeapon.minDamage;
@@ -29,9 +33,10 @@ public class attack : MonoBehaviour {
 	void Update ()
     {
         attackCooldown -= Time.deltaTime;
+        cooldown -= Time.deltaTime;
         if (CanAttack())
         {
-            if (axisInUse == false && GetComponent<movementplayer>().isGrounded)
+            if (Input.GetAxis("Fire1") != 0 && axisInUse == false && GetComponent<movementplayer>().isGrounded)
             {
                 if (attackCooldown <= 0f)
                 {
@@ -45,17 +50,27 @@ public class attack : MonoBehaviour {
                     attackCooldown = 1.5f;
                 }
             }
+            if(Input.GetAxis("Fire3") != 0 && cooldown <= 0)
+            {
+                if(fireball!=null)
+                {
+                    Vector3 forward = cam.camTransform.rotation.eulerAngles;
+                    forward.x = forward.x-10;
+                    Instantiate(fireball, transform.position+transform.forward,Quaternion.Euler(forward));
+                }
+                cooldown = 3f;
+            }
         }
         if (Input.GetAxis("Fire1") == 0)
         {
             axisInUse = false;
         }
+        
     }
 
     private static bool CanAttack()
     {
-        return Input.GetAxis("Fire1") != 0 &&
-            !GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().PlayerNotFocused &&
+        return !GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().PlayerNotFocused &&
             !GameObject.FindGameObjectWithTag("Inventory").GetComponentInChildren<KeyPressPanel>().GetInventoryIsOpen() &&
             !GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().GetIsDead();
     }
