@@ -57,6 +57,7 @@ public class attack : MonoBehaviour {
                     Vector3 forward = cam.camTransform.rotation.eulerAngles;
                     forward.x = forward.x-10;
                     Instantiate(fireball, transform.position+transform.forward,Quaternion.Euler(forward));
+                    animator.SetTrigger("Spell");
                 }
                 cooldown = 3f;
             }
