@@ -16,18 +16,17 @@ public class MouvementCamera : MonoBehaviour {
 
 
     private float distance = 5.0f;
-    private float currentX = 0.0f;
+    public float currentX = 0.0f;
     private float currentY = 0.0f;
     private float preInteractCurrentX = 0.0f;
     private float preInteractCurrentY = 0.0f;
-    public float sensivityX = 10.0f;
+    private float sensivityX = 10.0f;
     private float sensivityY = 4.0f;
 
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         camTransform = transform;
-       // cam = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

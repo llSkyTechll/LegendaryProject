@@ -29,17 +29,25 @@ public class GhostTiger : EnemyAI {
     {
         return "Idle";
     }
-
-    //public AudioMusic audioMusic;
+    protected override int SetMaxLife()
+    {
+        return 100;
+    }
 
     // Use this for initialization
  
     protected override void OnStart()
     {       
         rbd = GetComponent<Rigidbody>();
-        //audioSource = GameObject.FindGameObjectWithTag("SoundPlayer").GetComponent<AudioSource>();
         SetLife(100);
         attack = attackSound;
+
+        animationRunName = GetAnimationRunName();
+        animationAttackName = GetAnimationAttackName();
+        animationDeadName = GetAnimationDeadName();
+        animationIdleName = GetAnimationIdleName();
+        lookRadius = SetlookRadius();
+        MaxLife = SetMaxLife();
     }
 
     protected override void OnUpdate()
@@ -48,17 +56,17 @@ public class GhostTiger : EnemyAI {
         attackCooldown -= Time.deltaTime;
         if (health.currentHealth <= 0)
         {
-            animator.Play("Dead");
+            animator.Play(animationDeadName);
             gameObject.GetComponent<Character>().Die();
         }
         else
         {
             float distance = Vector3.Distance(target.position, transform.position);
-
+          
             if (distance <= lookRadius && distance > agent.stoppingDistance)
             {
                 agent.SetDestination(target.position);
-                if (attackCooldown <= 0f && agent.velocity.magnitude / agent.speed != 0)
+                if (attackCooldown <= 0f && agent.velocity.magnitude != 0)
                 {
                     animator.Play(animationRunName);
 
@@ -70,17 +78,17 @@ public class GhostTiger : EnemyAI {
             {
                 if (attackCooldown <= 0f)
                 {
-                    animator.Play("Skill2");
+                    animator.Play(animationAttackName);
                     DealDamage(10);
                     PlaySound(attackSound);
-                    //player.GetComponent<Health>().TakeDamage(10);
                     attackCooldown = 2f / attackSpeed;
                 }
                 FaceTarget();
             }
-            else if (distance > lookRadius && (agent.velocity.magnitude / agent.speed) == 0)
+            else if (distance > lookRadius && (agent.velocity.magnitude) == 0)
             {
-                animator.Play("Idle");
+                animator.Play(animationIdleName);
+                PlayRepeatingSound(idleSound);
             }
         }
     }
@@ -90,14 +98,8 @@ public class GhostTiger : EnemyAI {
         return 10f;
     }
 
-
-
-    // Update is called once per frame
-
-
-    //private void FollowPlayer()
-    //{
-    //    animator.Play("Run");
-    //    rbd.MovePosition(Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime));
-    //}
+    protected override string GetName()
+    {
+        return "GhostTiger";
+    }
 }

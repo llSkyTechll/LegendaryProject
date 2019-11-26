@@ -20,6 +20,8 @@ public abstract class EnemyAI : Character
     protected Health playerHealth;
     protected AudioClip attack;
     protected AudioClip deathSound;
+    public AudioClip idleSound;
+    private QuestManager questManager;
 
     protected int damageReduction = 0;
     protected string animationRunName = "Run";
@@ -31,12 +33,14 @@ public abstract class EnemyAI : Character
 
     void Start()
     {
+        questManager = GameObject.FindObjectOfType<QuestManager>();
         player = PositionManager.instance.player;
         soundplayer = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
         target = PositionManager.instance.player.transform;
+        SetLife(MaxLife);
         OnStart();
 
     }
@@ -48,6 +52,7 @@ public abstract class EnemyAI : Character
     protected abstract string GetAnimationDeadName();
     protected abstract string GetAnimationIdleName();
     protected abstract float SetlookRadius();
+    protected abstract int SetMaxLife();
 
 
     void Update()
@@ -56,6 +61,8 @@ public abstract class EnemyAI : Character
 
     }
     protected abstract void OnUpdate();
+
+    protected abstract string GetName();
 
     protected void FaceTarget()
     {
@@ -75,6 +82,7 @@ public abstract class EnemyAI : Character
         if(!isDead)
         {
             isDead = true;
+            questManager.UpdateQuesting(GetName());
             animator.SetTrigger("Death");
             PlaySound(attack,-0.6f);
             Destroy(gameObject, 10);
@@ -99,21 +107,5 @@ public abstract class EnemyAI : Character
         }
     }
 
-    protected void PlayRepeatingSound(AudioClip clip, float pitchOffset = 0, float volumeOffset = 0)
-    {
-        if (!soundplayer.isPlaying)
-        {
-            soundplayer.clip = clip;
-            soundplayer.pitch = UnityEngine.Random.Range(0.8f + pitchOffset, 1.2f + pitchOffset);
-            soundplayer.volume = UnityEngine.Random.Range(0.8f + volumeOffset, 1.1f + volumeOffset);
-            soundplayer.Play();
-        }
-    }
-
-    protected void PlaySound(AudioClip clip, float pitchOffset = 0, float volumeOffset = 0)
-    {
-        soundplayer.pitch = UnityEngine.Random.Range(0.8f + pitchOffset, 1.2f + pitchOffset);
-        soundplayer.volume = UnityEngine.Random.Range(0.8f + volumeOffset, 1.1f + volumeOffset);
-        soundplayer.PlayOneShot(clip);
-    }
+    
 }

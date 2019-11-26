@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
-    //GameObject player;
     public float speed = 1;
     public Interactable focus;
     CharacterController controller;
@@ -13,19 +12,14 @@ public class Player : Character
     private CameraFocus cameraFocus;
     Armor playerArmor;
     public int damageReduction = 0;
-   // Rigidbody rbd;
-    //AudioSource audioSource;
     private Animator animator;
-    private bool isDead;
     private int healthRegen = 1;
     private float healthRegenCD = 0f;
+    public AudioClip deathSound;
 
     // Use this for initialization
     void Start()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
-        //rbd = GetComponent<Rigidbody>();
-        //audioSource = GameObject.FindGameObjectWithTag("SoundPlayer").GetComponent<AudioSource>();
         sceneCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>();
         controller = GetComponent<CharacterController>();
         focus = null;
@@ -92,6 +86,7 @@ public class Player : Character
         if (!isDead)
         {
             animator.SetTrigger("Dead");
+            PlaySound(deathSound);
             GetComponentInChildren<ParticleSystem>().Play();
             isDead = true;
         }
@@ -118,19 +113,13 @@ public class Player : Character
 
     public override void Footsteps()
     {
-        if (controller.velocity.magnitude > 0.5f && controller.velocity.magnitude < 5f && soundplayer.isPlaying == false && GetComponent<movementplayer>().isGrounded)
+        if (controller.velocity.magnitude > 0.5f && controller.velocity.magnitude < 5f && GetComponent<movementplayer>().isGrounded)
         {
-            soundplayer.clip = step;
-            soundplayer.pitch = Random.Range(0.8f, 1);
-            soundplayer.volume = Random.Range(0.8f, 1.1f);
-            soundplayer.Play();
+            PlayRepeatingSound(step);
         }
-        else if (soundplayer.isPlaying == false && controller.velocity.magnitude > 5f && GetComponent<movementplayer>().isGrounded)
+        else if (controller.velocity.magnitude > 5f && GetComponent<movementplayer>().isGrounded)
         {
-            soundplayer.clip = step;
-            soundplayer.pitch = Random.Range(1.3f, 1.5f);
-            soundplayer.volume = Random.Range(0.8f, 1.1f);
-            soundplayer.Play();
+            PlayRepeatingSound(step,0.5f);
         }
     }
     void SetFocus(Interactable newFocus)

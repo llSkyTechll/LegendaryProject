@@ -2121,7 +2121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1265454134238778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 224.83, y: 31.28, z: 187.8}
+  m_LocalPosition: {x: 224.83, y: 31.28, z: 353.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4852088474274522}
@@ -2776,6 +2776,7 @@ MonoBehaviour:
   speed: 1
   focus: {fileID: 0}
   damageReduction: 0
+  deathSound: {fileID: 8300000, guid: de6f8b8f08419e74d857e3608321c90e, type: 3}
 --- !u!114 &114692153854146462
 MonoBehaviour:
   m_ObjectHideFlags: 1
