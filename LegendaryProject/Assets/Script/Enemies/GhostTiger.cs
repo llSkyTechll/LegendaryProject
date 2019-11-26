@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class GhostTiger : EnemyAI {
     public float speed = 1;
     protected Rigidbody rbd;
-
+    public Spawner spawn;
     public AudioClip attackSound;
 
 
@@ -101,5 +101,10 @@ public class GhostTiger : EnemyAI {
     protected override string GetName()
     {
         return "GhostTiger";
+    }
+    void OnDestroy()
+    {
+        spawn.Remove(gameObject);
+
     }
 }
