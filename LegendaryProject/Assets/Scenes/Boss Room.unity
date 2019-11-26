@@ -536,11 +536,6 @@ Prefab:
     m_Modifications:
     - target: {fileID: 224452101562557494, guid: 0e784569d71442c44b6ca7a7b4663b11,
         type: 2}
-      propertyPath: m_RootOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 224452101562557494, guid: 0e784569d71442c44b6ca7a7b4663b11,
-        type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -657,6 +652,17 @@ MonoBehaviour:
   player: {fileID: 1985475454}
   LaserStart: {fileID: 1621441179}
   LaserEnd: {fileID: 1374802272}
+--- !u!114 &1087526765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1087526763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 906d75494febb284caf7bd680bb20476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1374802272 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1771073630755934, guid: f85e3056e6d31594d8f370d05da256ff,

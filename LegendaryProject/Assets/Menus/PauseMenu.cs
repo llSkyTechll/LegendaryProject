@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenu : MonoBehaviour {
+public class PauseMenu : MainMenu {
 
     public static bool gameIsPaused = false;
 
     public GameObject pauseMenuUI;
+
+    public GameObject player;
 	
 	// Update is called once per frame
 	void Update () {
@@ -33,6 +37,20 @@ public class PauseMenu : MonoBehaviour {
         gameIsPaused = false;
     }
 
+    public override void Save()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(Application.persistentDataPath + "gameInfo.data", FileMode.Create);
+        PlayerData playerDataToSave = new PlayerData();
+        playerDataToSave.playerPositionX = PositionManager.instance.player.transform.position.x;
+        playerDataToSave.playerPositionY = PositionManager.instance.player.transform.position.y;
+        playerDataToSave.playerPositionZ = PositionManager.instance.player.transform.position.z;
+        playerDataToSave.zone = SceneManager.GetActiveScene().name;
+        bf.Serialize(file, playerDataToSave);
+        file.Close();
+        Resume();
+    }
+
     void Pause()
     {
         Cursor.visible = true;
@@ -50,7 +68,7 @@ public class PauseMenu : MonoBehaviour {
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void QuitGame()
+    public override void QuitGame()
     {
         Debug.Log("Quit");
         Application.Quit();

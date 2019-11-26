@@ -212,6 +212,17 @@ MonoBehaviour:
   player: {fileID: 326451462}
   LaserStart: {fileID: 0}
   LaserEnd: {fileID: 0}
+--- !u!114 &109203093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 109203091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 906d75494febb284caf7bd680bb20476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &159530271
 Prefab:
   m_ObjectHideFlags: 0
