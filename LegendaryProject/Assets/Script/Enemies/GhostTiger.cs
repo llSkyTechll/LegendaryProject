@@ -100,6 +100,6 @@ public class GhostTiger : EnemyAI {
 
     protected override string GetName()
     {
-        return "GhostTiger";
+        return "TigreSpectral";
     }
 }

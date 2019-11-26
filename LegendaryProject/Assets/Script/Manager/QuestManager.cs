@@ -5,37 +5,50 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour {
     public enum Targets
     {
-        GhostTiger,WhaleBoss
+        TigreSpectral,MrBaleine
     }
     private int NumberOfEnemiesKilled=0;
     public int NumberOfEnemiesToKill=5;
+    private bool progressEnabled;
     public Targets TargetName;
     public Texture textureQuest;
     public Material material;
-	public void UpdateQuesting (string deadName) {
+    private Rect rect;
+    private Rect textRect;
+    public GameObject pnj;
+    public Transform transformPnj;
+    public void UpdateQuesting (string deadName) {
         if (deadName == TargetName.ToString())
         {
             NumberOfEnemiesKilled++;
-            if (NumberOfEnemiesToKill <= NumberOfEnemiesKilled)
+            if (NumberOfEnemiesToKill <= NumberOfEnemiesKilled && !progressEnabled)
             {
-
+                Instantiate(pnj, transformPnj);
+                progressEnabled = true;
+                EnableStoryProgress();
             }
         }
 	}
 
 
-    void EnableStoryProgress()
+    public void EnableStoryProgress()
     {
-
+        SpeechEnabler[] dialogs = FindObjectsOfType<SpeechEnabler>();
+        foreach (SpeechEnabler dialog in dialogs)
+        {
+            dialog.UpdateDialogs();
+        }
+        print(dialogs.Length);
     }
 
     private void OnGUI()
     {
-        GUIStyle style = new GUIStyle();
-        style.fontSize = 26;
-        style.normal.textColor = Color.white;
-        GUI.Box(new Rect(10, 10, 500, 30),textureQuest);
-        GUI.Label(new Rect(10, 10, 100, 80), TargetName+" à tuer : " + NumberOfEnemiesKilled+" / "+ NumberOfEnemiesToKill, style);
-        
+            rect = new Rect(10, 10, 500, 30);
+            textRect = new Rect(10, 10, 100, 80);
+            GUIStyle style = new GUIStyle();
+            style.fontSize = 26;
+            style.normal.textColor = Color.white;
+            GUI.Box(rect, textureQuest);
+            GUI.Label(textRect, progressEnabled?"Quête terminer!":TargetName + " à tuer : " + NumberOfEnemiesKilled + " / " + NumberOfEnemiesToKill, style);
     }
 }

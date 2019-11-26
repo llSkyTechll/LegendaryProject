@@ -10,6 +10,7 @@ TagManager:
   - LaserEnd
   - Laser
   - Inventory
+  - PNJ
   layers:
   - Default
   - TransparentFX

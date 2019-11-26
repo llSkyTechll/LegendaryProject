@@ -235,7 +235,7 @@ public class Boss : EnemyAI
 
     protected override string GetName()
     {
-        return "WhaleBoss";
+        return "MrBaleine";
     }
 
 }
