@@ -1054,6 +1054,16 @@ Prefab:
       propertyPath: night
       value: 
       objectReference: {fileID: 2100000, guid: c2f79661693d5c1448297bd95bc5827f, type: 2}
+    - target: {fileID: 114297147706602180, guid: e1c556649d67308499063ac157d53783,
+        type: 2}
+      propertyPath: dayEnd
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114297147706602180, guid: e1c556649d67308499063ac157d53783,
+        type: 2}
+      propertyPath: dayStart
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1c556649d67308499063ac157d53783, type: 2}
   m_IsPrefabAsset: 0
