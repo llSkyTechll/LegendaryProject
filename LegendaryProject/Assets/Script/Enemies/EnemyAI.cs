@@ -86,6 +86,7 @@ public abstract class EnemyAI : Character
             animator.SetTrigger("Death");
             PlaySound(attack,-0.6f);
             Destroy(gameObject, 10);
+
         }
     }
 

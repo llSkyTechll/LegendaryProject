@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-
     public float spawnRate = 1;
     private SpawnPoint[] spawnPoints;
     public GameObject[] ennemiPrefab;
-    static List<GameObject> Ennemis;
     private float timeLeftBeforeSpawn = 0;
     public int MaxEnnemiInSpawn;
+    private int count = 0;
     // Use this for initialization
     void Start()
     {
         spawnPoints = FindObjectsOfType<SpawnPoint>();
-
         timeLeftBeforeSpawn = 1 / spawnRate;
-        Ennemis = spawnPoints[0].Ennemis;
     }
 
     // Update is called once per frame
@@ -36,19 +33,27 @@ public class Spawner : MonoBehaviour
     }
     private void SpawnEnnemi()
     {
-        if (Ennemis.Count < MaxEnnemiInSpawn)
+        int countSpawnPoint = spawnPoints.Length;
+        int randomSpawnPointIndex = Random.Range(0, countSpawnPoint);
+        SpawnPoint spawnpointRandomlySelected = spawnPoints[randomSpawnPointIndex];
+
+        if (spawnpointRandomlySelected.CountEnemyInList() < MaxEnnemiInSpawn)
         {
-            int countSpawnPoint = spawnPoints.Length;
-            int randomSpawnPointIndex = Random.Range(0, countSpawnPoint);
-            SpawnPoint spawnpointRandomlySelected = spawnPoints[randomSpawnPointIndex];
-            GameObject newEnemy = Instantiate(ennemiPrefab[Random.Range(0, ennemiPrefab.Length)], spawnpointRandomlySelected.GetPosition(), spawnpointRandomlySelected.transform.rotation);
-            Ennemis.Add(newEnemy);
+            GameObject newEnemy = Instantiate(ennemiPrefab[0/*Random.Range(0, ennemiPrefab.Length)*/], spawnpointRandomlySelected.GetPosition(), spawnpointRandomlySelected.transform.rotation);
+            newEnemy.GetComponentInChildren<GhostTiger>().spawnId = spawnpointRandomlySelected.idSpawn;
+            newEnemy.GetComponentInChildren<GhostTiger>().Id = count;
+            count++;
+            spawnpointRandomlySelected.AddEnnemi(newEnemy);
         }
-
-
     }
-    public void Remove(GameObject Enemy)
+    public void Remove(GameObject inEnemy)
     {
-        Ennemis.Remove(Enemy);
+        foreach (SpawnPoint spawn in spawnPoints)
+        {
+            if (spawn.idSpawn == inEnemy.GetComponentInChildren<GhostTiger>().spawnId)
+            {
+                spawn.Remove(inEnemy);
+            }
+        }
     }
 }
