@@ -10,14 +10,14 @@ public class DayNightCycle : MonoBehaviour
     public float currentTimeOfDay = 0;
     public float timeMultiplier = 10f;
     float sunInitialIntensify;
-    public float startIntensitymultiplier = 0.35f;
+    public float startIntensitymultiplier = 0.25f;
     public float vitesseLeverCoucherSoleil = 4f;
     private GameObject cam;
     private Skybox sky;
     public Material day;
     public Material night;
     public float dayStart = 0.15f;
-    public float dayEnd = 0.85f;
+    public float dayEnd = 0.5f;
     // Use this for initialization
     void Start()
     {
@@ -46,7 +46,8 @@ public class DayNightCycle : MonoBehaviour
 
     void UpdateSun()
     {
-        sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * 180f)-1, 0, 0);
+        Vector3 tempVector = new Vector3((currentTimeOfDay * 360f) - 1, 0, 0);
+        sun.transform.localRotation = Quaternion.Euler(tempVector);
         float intensityMultiplier = 1;
         sun.shadowStrength = 0.5f;
         sky.material = day;
@@ -57,7 +58,7 @@ public class DayNightCycle : MonoBehaviour
             intensityMultiplier = startIntensitymultiplier;
 
         }
-        else if (currentTimeOfDay <= 0.30f)
+        else if (currentTimeOfDay <= 0.20f)
         {
             intensityMultiplier = startIntensitymultiplier + (Mathf.Clamp01(currentTimeOfDay - 0.14f) * vitesseLeverCoucherSoleil);
             if (intensityMultiplier >= 1f)
@@ -65,7 +66,7 @@ public class DayNightCycle : MonoBehaviour
                 intensityMultiplier = 1f;
             }
         }
-        else if (currentTimeOfDay >= 0.70f)
+        else if (currentTimeOfDay >= 0.50f)
         {
             intensityMultiplier = 1 - (Mathf.Clamp01(currentTimeOfDay - 0.69f) * vitesseLeverCoucherSoleil);
             if (intensityMultiplier <= startIntensitymultiplier)

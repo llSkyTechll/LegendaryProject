@@ -54,10 +54,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sun: {fileID: 0}
   secondsInFullDay: 300
-  currentTimeOfDay: 0
-  timeMultiplier: 10
+  currentTimeOfDay: 0.28
+  timeMultiplier: 1
   startIntensitymultiplier: 0.5
   vitesseLeverCoucherSoleil: 3
+  day: {fileID: 2100000, guid: 16e5797f94893404c9e7d59306ad6eb6, type: 2}
+  night: {fileID: 2100000, guid: c2f79661693d5c1448297bd95bc5827f, type: 2}
+  dayStart: 0.05
+  dayEnd: 0.5
 --- !u!220 &220431709701682034
 LightProbeGroup:
   m_ObjectHideFlags: 1
