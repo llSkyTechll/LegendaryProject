@@ -2185,7 +2185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3cb2bde132953548b85b439ae6f5eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomName: 2
+  RoomName: 0
   SpeechBubble: {fileID: 223245377434833000}
   dialogs:
   - {fileID: 11400000, guid: 92296cc017d435f4bbca01390e722f42, type: 2}

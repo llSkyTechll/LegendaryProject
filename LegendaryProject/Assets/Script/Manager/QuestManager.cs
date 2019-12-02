@@ -11,8 +11,7 @@ public class QuestManager : MonoBehaviour {
     public int NumberOfEnemiesToKill=5;
     private bool progressEnabled;
     public Targets TargetName;
-    public Texture textureQuest;
-    public Material material;
+    private Texture textureQuest;
     private Rect rect;
     private Rect textRect;
     public GameObject pnj;
@@ -48,6 +47,6 @@ public class QuestManager : MonoBehaviour {
             style.fontSize = 26;
             style.normal.textColor = Color.white;
             GUI.Box(rect, textureQuest);
-            GUI.Label(textRect, progressEnabled?"Quête terminer!":TargetName + " à tuer : " + NumberOfEnemiesKilled + " / " + NumberOfEnemiesToKill, style);
+            GUI.Label(textRect, progressEnabled?"Quête terminée!":TargetName + " à tuer : " + NumberOfEnemiesKilled + " / " + NumberOfEnemiesToKill, style);
     }
 }
