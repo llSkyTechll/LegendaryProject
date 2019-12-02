@@ -1699,7 +1699,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1863085422227850}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 148.06, y: 7.0287457, z: 113.65883}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.08843615, y: 0.08843615, z: 0.08843615}
   m_Children:
   - {fileID: 4979157686238096}
@@ -2188,7 +2188,6 @@ MonoBehaviour:
   RoomName: 0
   SpeechBubble: {fileID: 223245377434833000}
   dialogs:
-  - {fileID: 11400000, guid: 92296cc017d435f4bbca01390e722f42, type: 2}
   - {fileID: 11400000, guid: 0f449601e6e57e24f8b740e9f6408ccd, type: 2}
   currentDialog: {fileID: 0}
   canvasText: {fileID: 114088284970576102}

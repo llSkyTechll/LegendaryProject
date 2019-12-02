@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: 090fb81e270ae584ab2f109123209450
+  - enabled: 1
+    path: Assets/Scenes/Labyrinth.unity
+    guid: 79445ce977bc0fb4aa1391da4feca787
   m_configObjects: {}
