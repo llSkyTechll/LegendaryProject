@@ -101,7 +101,7 @@ public abstract class EnemyAI : Character
 
     public override void Footsteps()
     {
-        if (agent.velocity.magnitude > 2 && soundplayer.isPlaying == false)
+        if (agent.velocity.magnitude > 2)
         {
             PlayRepeatingSound(step);
         }

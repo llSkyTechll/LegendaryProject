@@ -12,7 +12,7 @@ public class GhostTiger : EnemyAI {
 
     protected override string GetAnimationRunName()
     {
-        return "run";
+        return "Run";
     }
 
   protected override string GetAnimationAttackName()
