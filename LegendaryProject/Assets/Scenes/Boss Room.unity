@@ -744,13 +744,22 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114443014459981106, guid: 4b26b6bc5e98e65428f6348f1e708fa3,
+    - target: {fileID: 114395060506926470, guid: 4b26b6bc5e98e65428f6348f1e708fa3,
         type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 1985475454}
-    m_RemovedComponents:
-    - {fileID: 114443014459981106, guid: 4b26b6bc5e98e65428f6348f1e708fa3, type: 2}
+    - target: {fileID: 114395060506926470, guid: 4b26b6bc5e98e65428f6348f1e708fa3,
+        type: 2}
+      propertyPath: LaserStart
+      value: 
+      objectReference: {fileID: 1621441179}
+    - target: {fileID: 114395060506926470, guid: 4b26b6bc5e98e65428f6348f1e708fa3,
+        type: 2}
+      propertyPath: LaserEnd
+      value: 
+      objectReference: {fileID: 1374802272}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b26b6bc5e98e65428f6348f1e708fa3, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1575325255

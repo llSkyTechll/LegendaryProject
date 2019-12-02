@@ -1,21 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GhostTiger : EnemyAI {
+public class GhostTiger : EnemyAI
+{
     public float speed = 1;
     protected Rigidbody rbd;
-
+    public Spawner spawn;
     public AudioClip attackSound;
-
+    public int spawnId = 0;
+    public int Id = 0;
+    private bool removed = false;
 
     protected override string GetAnimationRunName()
     {
         return "Run";
     }
 
-  protected override string GetAnimationAttackName()
+    protected override string GetAnimationAttackName()
     {
         return "Skill2";
     }
@@ -35,13 +39,13 @@ public class GhostTiger : EnemyAI {
     }
 
     // Use this for initialization
- 
+
     protected override void OnStart()
-    {       
+    {
         rbd = GetComponent<Rigidbody>();
         SetLife(100);
         attack = attackSound;
-
+        spawn = FindObjectOfType<Spawner>();
         animationRunName = GetAnimationRunName();
         animationAttackName = GetAnimationAttackName();
         animationDeadName = GetAnimationDeadName();
@@ -57,12 +61,13 @@ public class GhostTiger : EnemyAI {
         if (health.currentHealth <= 0)
         {
             animator.Play(animationDeadName);
+            Remove();
             gameObject.GetComponent<Character>().Die();
         }
         else
         {
             float distance = Vector3.Distance(target.position, transform.position);
-          
+
             if (distance <= lookRadius && distance > agent.stoppingDistance)
             {
                 agent.SetDestination(target.position);
@@ -90,6 +95,15 @@ public class GhostTiger : EnemyAI {
                 animator.Play(animationIdleName);
                 PlayRepeatingSound(idleSound);
             }
+        }
+    }
+
+    private void Remove()
+    {
+        if (!removed)
+        {
+            removed = true;
+            spawn.Remove(gameObject);           
         }
     }
 

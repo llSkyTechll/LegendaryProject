@@ -34,12 +34,12 @@ public abstract class EnemyAI : Character
     void Start()
     {
         questManager = GameObject.FindObjectOfType<QuestManager>();
-        player = PositionManager.instance.player;
+        player = GameObject.FindGameObjectWithTag("Player");
         soundplayer = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
-        target = PositionManager.instance.player.transform;
+        target = player.transform;
         SetLife(MaxLife);
         OnStart();
 
@@ -86,6 +86,7 @@ public abstract class EnemyAI : Character
             animator.SetTrigger("Death");
             PlaySound(attack,-0.6f);
             Destroy(gameObject, 10);
+
         }
     }
 
@@ -107,5 +108,6 @@ public abstract class EnemyAI : Character
         }
     }
 
-    
+   
+
 }
