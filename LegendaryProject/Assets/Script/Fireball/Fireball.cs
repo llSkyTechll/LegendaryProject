@@ -29,7 +29,10 @@ public class Fireball : MonoBehaviour
         {
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
-            other.gameObject.GetComponent<Health>().TakeDamage(25);
+            if (other.gameObject.GetComponent<EnemyAI>()!=null && other.gameObject.GetComponent<EnemyAI>().GetType().BaseType.ToString() == "EnemyAI")
+            {
+                other.gameObject.GetComponent<Health>().TakeDamage(25);
+            }
         }
 
     }
