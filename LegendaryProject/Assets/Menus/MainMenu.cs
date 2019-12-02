@@ -8,8 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
-    private GameObject player;
-
 	public void NewGame()
     {
         Save();

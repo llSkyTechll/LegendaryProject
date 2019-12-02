@@ -11,7 +11,7 @@ public class PauseMenu : MainMenu {
 
     public GameObject pauseMenuUI;
 
-    public GameObject player;
+    public GameObject playerObject;
 	
 	// Update is called once per frame
 	void Update () {

@@ -19,13 +19,16 @@ public class SpeechEnabler : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         SpeechBubble.enabled = false;
-        textNumber = 1;
+        textNumber = 0;
         ChangeText();
     }
 	
 	public void UpdateDialogs() {
-        textNumber++;
-        ChangeText();
+        if (textNumber < dialogs.Length -1)
+        {
+           textNumber++;
+           ChangeText();
+        }
     }
 
     private void ChangeText()
@@ -48,6 +51,7 @@ public class SpeechEnabler : MonoBehaviour {
     public void StopConversation()
     {
         SpeechBubble.enabled = false;
+        print(textNumber);
         if (textNumber == dialogs.Length-1)
         {
             switch (RoomName)

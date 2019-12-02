@@ -604,6 +604,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114831647455196294, guid: 0e784569d71442c44b6ca7a7b4663b11,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1985475454}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e784569d71442c44b6ca7a7b4663b11, type: 2}
   m_IsPrefabAsset: 0
@@ -1053,7 +1058,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4937984772957054, guid: 8ba25334269d09e4caa588d9d4f384f5, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 353.6
+      value: 203.76
       objectReference: {fileID: 0}
     - target: {fileID: 4937984772957054, guid: 8ba25334269d09e4caa588d9d4f384f5, type: 2}
       propertyPath: m_LocalRotation.x
