@@ -38,7 +38,6 @@ public class QuestManager : MonoBehaviour {
         {
             dialog.UpdateDialogs();
         }
-        print(dialogs.Length);
     }
 
     private void OnGUI()

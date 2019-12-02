@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -314,6 +314,53 @@ MonoBehaviour:
   player: {fileID: 1066905998}
   LaserStart: {fileID: 0}
   LaserEnd: {fileID: 0}
+--- !u!1001 &86949992
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4716856885572574, guid: 6dd686ec86159ce44ab9ee13be24d69d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 155.5611
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716856885572574, guid: 6dd686ec86159ce44ab9ee13be24d69d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 6.8198647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716856885572574, guid: 6dd686ec86159ce44ab9ee13be24d69d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 127.764175
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716856885572574, guid: 6dd686ec86159ce44ab9ee13be24d69d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716856885572574, guid: 6dd686ec86159ce44ab9ee13be24d69d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716856885572574, guid: 6dd686ec86159ce44ab9ee13be24d69d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716856885572574, guid: 6dd686ec86159ce44ab9ee13be24d69d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716856885572574, guid: 6dd686ec86159ce44ab9ee13be24d69d, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114824283890991772, guid: 6dd686ec86159ce44ab9ee13be24d69d,
+        type: 2}
+      propertyPath: transformPnj
+      value: 
+      objectReference: {fileID: 156630605}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6dd686ec86159ce44ab9ee13be24d69d, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &126202531
 Prefab:
   m_ObjectHideFlags: 0
@@ -991,67 +1038,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1401650496}
   m_Script: {fileID: 11500000, guid: 1ac59dcb4bc2b0b42b47eadb5f991ef6, type: 3}
---- !u!1 &1652489654
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1652489655}
-  - component: {fileID: 1652489656}
-  - component: {fileID: 1652489657}
-  m_Layer: 0
-  m_Name: QuestManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1652489655
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1652489654}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 155.5611, y: 6.8198647, z: 127.764175}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1652489656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1652489654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcd2fad4c71bdf84bb5a0ee14364b037, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NumberOfEnemiesToKill: 1
-  TargetName: 0
-  textureQuest: {fileID: 0}
-  material: {fileID: 0}
-  pnj: {fileID: 1863085422227850, guid: f5621564e85d887408939d0c0185def8, type: 2}
-  transformPnj: {fileID: 156630605}
---- !u!114 &1652489657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1652489654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
 --- !u!1 &1756805615
 GameObject:
   m_ObjectHideFlags: 0
