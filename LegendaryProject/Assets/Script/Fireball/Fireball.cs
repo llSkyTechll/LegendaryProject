@@ -28,8 +28,8 @@ public class Fireball : MonoBehaviour
         if (other.gameObject.layer != LayerMask.NameToLayer("Player"))
         {
             Instantiate(explosion, transform.position, transform.rotation);
-            other.gameObject.GetComponent<Health>().TakeDamage(25);
             Destroy(gameObject);
+            other.gameObject.GetComponent<Health>().TakeDamage(25);
         }
 
     }
