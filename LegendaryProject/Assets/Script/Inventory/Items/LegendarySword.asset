@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d555f5406fb5340a5684936574777c, type: 3}
+  m_Name: LegendarySword
+  m_EditorClassIdentifier: 
+  id: f874392cbcc00dd48a7c21787032dde4
+  ItemName: LegendarySword
+  Icon: {fileID: 21300000, guid: c45509f7dee302b4c9d0d8202cda27ca, type: 3}
+  StrenghtBonus: 10000
+  DefenseBonus: 0
+  VitalityBonus: 0
+  EquipmentType: 2
