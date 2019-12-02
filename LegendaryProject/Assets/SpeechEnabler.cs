@@ -1,20 +1,71 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SpeechEnabler : MonoBehaviour {
-
-    private bool displayText;
-    public Canvas canvas;
+    public enum Rooms
+    {
+       BossRoom,Labyrinth,Forest
+    }
+    private int textNumber;
+    public Rooms RoomName;
+    public Canvas SpeechBubble;
+    public DialogText[] dialogs;
+    public DialogText currentDialog;
+    public Text canvasText;
 	// Use this for initialization
 	void Start () {
-        canvas.enabled = false;
-	}
+        SpeechBubble.enabled = false;
+        textNumber = 1;
+        ChangeText();
+    }
 	
-	// Update is called once per frame
-	void Update () {
+	public void UpdateDialogs() {
+        textNumber++;
+        ChangeText();
+    }
 
-         canvas.enabled=GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MouvementCamera>().PlayerNotFocused;
+    private void ChangeText()
+    {
+        DetermineCurrentDialog();
+        string dialog = currentDialog.dialogText;
+        canvasText.text = dialog;
+    }
 
+    private void DetermineCurrentDialog()
+    {
+        currentDialog = dialogs[textNumber];
+    }
+
+    public void BeginConversation()
+    {
+        SpeechBubble.enabled = true;
+    }
+
+    public void StopConversation()
+    {
+        SpeechBubble.enabled = false;
+        if (textNumber == dialogs.Length-1)
+        {
+            switch (RoomName)
+            {
+                case Rooms.BossRoom:
+                    SceneManager.LoadScene("Boss Room");
+                    break;
+                case Rooms.Labyrinth:
+                    SceneManager.LoadScene("Labyrinth");
+                    break;
+                case Rooms.Forest:
+                    SceneManager.LoadScene("Forest");
+                    break;
+                default:
+                    SceneManager.LoadScene("Forest");
+                    break;
+            }
+           
+        }
     }
 }

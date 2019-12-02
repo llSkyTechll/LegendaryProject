@@ -48,8 +48,9 @@ public class Player : Character
             if (Input.GetButtonDown("Interact") && focus != null)
             {
                 sceneCamera.ResetFocus();
+                focus.GetComponentInChildren<SpeechEnabler>().StopConversation();
                 focus = null;
-                SceneManager.LoadScene("Boss Room");
+                
             }
             else
             {
@@ -60,6 +61,7 @@ public class Player : Character
                     if (interactable != null)
                     {
                         SetFocus(interactable);
+                        focus.GetComponentInChildren<SpeechEnabler>().BeginConversation();
                     }
                 }
             }
