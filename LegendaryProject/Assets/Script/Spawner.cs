@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
     private float timeLeftBeforeSpawn = 0;
     public int MaxEnnemiInSpawn;
     private int count = 0;
+    private bool spawnerEnabled = false;
     // Use this for initialization
     void Start()
     {
@@ -20,7 +21,11 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateSapwn();
+        if (spawnerEnabled)
+        {
+            UpdateSapwn();
+        }
+
     }
     private void UpdateSapwn()
     {
@@ -56,4 +61,14 @@ public class Spawner : MonoBehaviour
             }
         }
     }
+
+    public void StartSpawner()
+    {
+        spawnerEnabled = true;
+    }
+    public void StopSpawner()
+    {
+        spawnerEnabled = false;
+    }
+
 }

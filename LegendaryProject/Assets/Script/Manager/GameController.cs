@@ -8,12 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-
     public static GameController gameControl;
-
-
     public void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Forest")
+        {
+            GameObject.FindObjectOfType<Spawner>().StartSpawner();
+        }
         BinaryFormatter bf = new BinaryFormatter();
         if (File.Exists(Application.persistentDataPath + "gameInfo.data"))
         {

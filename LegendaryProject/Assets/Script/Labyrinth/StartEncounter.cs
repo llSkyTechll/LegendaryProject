@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class StartEncounter : MonoBehaviour {
     public Oscillation oscillation;
+    private bool Triggered = false;
 	// Use this for initialization
 	public void OnTriggerEnter(Collider collider)
     {
-        oscillation.DoorUp();
+        if (collider.GetComponent<movementplayer>() != null && !Triggered)
+        {
+            oscillation.DoorUp();
+            GameObject.FindObjectOfType<Spawner>().StartSpawner();
+            Triggered = true;
+        }
     }
 }

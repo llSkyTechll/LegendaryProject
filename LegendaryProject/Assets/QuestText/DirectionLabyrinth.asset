@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77f1791844975054d8009046f0254112, type: 3}
-  m_Name: QuestNotDone
+  m_Name: DirectionLabyrinth
   m_EditorClassIdentifier: 
-  dialogText: Avant de vous aventurer dans l'antre de Mr.Baleine. Il vous faudra prouver
-    votre force en vaincant 5 tigres spectraux.Revenez me voir lorsque vous aurez
-    accomplit l'exploit.
+  dialogText: Avant de vous aventurer dans le labyrinthe de la mort. Il vous faudra
+    prouver votre force en vaincant 5 tigres spectraux.Revenez me voir lorsque vous
+    aurez accomplit l'exploit.

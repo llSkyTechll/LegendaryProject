@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuestManager : MonoBehaviour {
     public enum Targets
@@ -36,6 +37,11 @@ public class QuestManager : MonoBehaviour {
         foreach (SpeechEnabler dialog in dialogs)
         {
             dialog.UpdateDialogs();
+        }
+        if(SceneManager.GetActiveScene().name== "Labyrinth")
+        {
+            GameObject.FindObjectOfType<Oscillation>().DoorDown();
+            GameObject.FindObjectOfType<Spawner>().StopSpawner();
         }
     }
 
