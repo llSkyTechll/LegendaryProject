@@ -90,75 +90,99 @@ public class Boss : EnemyAI
         }
         else
         {
-            float distance = Vector3.Distance(target.position, transform.position);
-            if (distance <= lookRadius && distance > agent.stoppingDistance)
-            {
-                int RandomDistanceAttack = randomMove.Next(0, 4);
-                if (TimeBeforeAction <= 0)
-                {
-
-                    ResetActionPossible();
-                    if (RandomDistanceAttack <= 2)
-                    {
-                        Run();
-                        TimeBeforeAction = 5f;
-                    }
-                    else
-                    {
-                        animationAttackName = "AttackBite";
-                        Objectif();
-                        TimeBeforeAction = 5f;
-                    }
-                }
-                else
-                {
-                    if (Moving)
-                    {
-                        Run();
-                    }
-                    else if (Aim)
-                    {
-                        if (TimeBeforeShoot <= 0)
-                        {
-                            AttackLaser();
-                        }
-                        else
-                        {
-                            Objectif();
-                        }
-
-                    }
-                }
-
-                FaceTarget();
-            }
-            else if (distance <= agent.stoppingDistance)
-            {
-                int RandomCloseAttack = randomMove.Next(0, 2);
-                laser.SetActive(false);
-                if (attackCooldown <= 0f)
-                {
-                    if (RandomCloseAttack == 0)
-                    {
-                        animationAttackName = "AttackTail";
-                        AttackTail();
-                    }
-                    else
-                    {
-                        animationAttackName = "JumpStationary";
-                        AttackJump();
-                    }
-                }
-                FaceTarget();
-            }
-            else if (distance > lookRadius && (agent.velocity.magnitude / agent.speed) == 0)
-            {
-                animator.Play(animationIdleName);
-                PlayRepeatingSound(idleSound,-0.2f);
-                laser.SetActive(false);
-            }
+            BeAlive();
         }
 
+    }
+
+    void BeAlive()
+    {
+        float distance = Vector3.Distance(target.position, transform.position);
+        if (distance <= lookRadius && distance > agent.stoppingDistance)
+        {
+            DoFarAction();
+        }
+        else if (distance <= agent.stoppingDistance)
+        {
+            DoNearAction();
+        }
+        else if (distance > lookRadius && (agent.velocity.magnitude / agent.speed) == 0)
+        {
+            animator.Play(animationIdleName);
+            PlayRepeatingSound(idleSound, -0.2f);
+            laser.SetActive(false);
+        }
+    }
+
+    void DoFarAction()
+    {
+        if (TimeBeforeAction <= 0)
+        {
+            ChangeFarAction();
+        }
+        else
+        {
+            KeepDoingFarAction();
+        }
+
+        FaceTarget();
+    }
+
+    void KeepDoingFarAction()
+    {
+        if (Moving)
+        {
+            Run();
+        }
+        else if (Aim)
+        {
+            if (TimeBeforeShoot <= 0)
+            {
+                AttackLaser();
+            }
+            else
+            {
+                Objectif();
+            }
+
+        }
+    }
+
+    void ChangeFarAction()
+    {
+        int RandomDistanceAttack = randomMove.Next(0, 4);
+        ResetActionPossible();
+        if (RandomDistanceAttack <= 2)
+        {
+            Run();
+            TimeBeforeAction = 5f;
+        }
+        else
+        {
+            animationAttackName = "AttackBite";
+            Objectif();
+            TimeBeforeAction = 5f;
+        }
+    }
+
+    void DoNearAction()
+    {
+        int RandomCloseAttack = randomMove.Next(0, 2);
+        laser.SetActive(false);
+        if (attackCooldown <= 0f)
+        {
+            if (RandomCloseAttack == 0)
+            {
+                animationAttackName = "AttackTail";
+                AttackTail();
+            }
+            else
+            {
+                animationAttackName = "JumpStationary";
+                AttackJump();
+            }
+        }
+        FaceTarget();
     }
 
     void OnDestroy()
