@@ -25,7 +25,7 @@ public class Fireball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer != LayerMask.NameToLayer("Player")&& other.gameObject.layer != LayerMask.NameToLayer("Ignore Raycast"))
         {
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
