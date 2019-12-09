@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Linq;
 
 public class SpawnPoint : MonoBehaviour
@@ -10,6 +11,10 @@ public class SpawnPoint : MonoBehaviour
 
     public Vector3 GetPosition()
     {
+        if (SceneManager.GetActiveScene().name != "Labyrinth")
+        {
+            return gameObject.transform.position + new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+        }
         return gameObject.transform.position;
     }
 

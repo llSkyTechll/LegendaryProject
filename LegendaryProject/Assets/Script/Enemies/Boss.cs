@@ -83,6 +83,8 @@ public class Boss : EnemyAI
         {
             if (!isDead)
             {
+                laser.SetActive(false);
+                laserLine.enabled = false;
                 animator.Play(animationDeadName);
                 Die();
             }

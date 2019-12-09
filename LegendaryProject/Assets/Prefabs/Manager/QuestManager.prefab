@@ -68,7 +68,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NumberOfEnemiesToKill: 1
   TargetName: 0
-  textureQuest: {fileID: 0}
-  material: {fileID: 0}
   pnj: {fileID: 1863085422227850, guid: f5621564e85d887408939d0c0185def8, type: 2}
   transformPnj: {fileID: 0}

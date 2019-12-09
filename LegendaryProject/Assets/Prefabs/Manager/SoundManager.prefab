@@ -148,4 +148,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SurroundSound: {fileID: 8300000, guid: ee15634c856cffe47939c07391e455e2, type: 3}
-  Music: {fileID: 0}

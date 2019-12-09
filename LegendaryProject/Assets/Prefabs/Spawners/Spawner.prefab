@@ -54,3 +54,4 @@ MonoBehaviour:
   spawnRate: 0.3
   ennemiPrefab:
   - {fileID: 1979318498247502, guid: 566085b8ad074564da1569b118d8fe1a, type: 2}
+  MaxEnnemiInSpawn: 0
