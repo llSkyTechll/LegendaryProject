@@ -44,7 +44,7 @@ public class Spawner : MonoBehaviour
 
         if (spawnpointRandomlySelected.CountEnemyInList() < MaxEnnemiInSpawn)
         {
-            GameObject newEnemy = Instantiate(ennemiPrefab[0/*Random.Range(0, ennemiPrefab.Length)*/], spawnpointRandomlySelected.GetPosition(), spawnpointRandomlySelected.transform.rotation);
+            GameObject newEnemy = Instantiate(ennemiPrefab[0], spawnpointRandomlySelected.GetPosition(), spawnpointRandomlySelected.transform.rotation);
             newEnemy.GetComponentInChildren<GhostTiger>().spawnId = spawnpointRandomlySelected.idSpawn;
             newEnemy.GetComponentInChildren<GhostTiger>().Id = count;
             count++;

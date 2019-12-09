@@ -15,7 +15,6 @@ public class SpawnPoint : MonoBehaviour
 
     public void Remove(GameObject ennemyToRemove)
     {
-        int idEnnemyToRemove = ennemyToRemove.GetComponentInChildren<GhostTiger>().Id;
         GameObject itemToRemove = enemys.Where(r => r.GetInstanceID() == ennemyToRemove.GetInstanceID()).First();
         if (itemToRemove != null)
         {

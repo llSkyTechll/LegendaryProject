@@ -12,7 +12,7 @@ public class QuestManager : MonoBehaviour {
     public int NumberOfEnemiesToKill=5;
     private bool progressEnabled;
     public Targets TargetName;
-    private Texture textureQuest;
+    private Texture textureQuest = null;
     private Rect rect;
     private Rect textRect;
     public GameObject pnj;
