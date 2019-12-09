@@ -76,7 +76,6 @@ public class Boss : EnemyAI
 
     protected override void OnUpdate()
     {
-
         Footsteps();
         attackCooldown -= Time.deltaTime;
         TimeBeforeAction -= Time.deltaTime;
@@ -202,6 +201,7 @@ public class Boss : EnemyAI
     }
     void Objectif()
     {
+        laserLine.enabled = true;
         agent.SetDestination(transform.position);
         TimeBeforeShoot -= Time.deltaTime;
         laser.SetActive(true);
