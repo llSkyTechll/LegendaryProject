@@ -36,37 +36,52 @@ public class attack : MonoBehaviour {
         cooldown -= Time.deltaTime;
         if (CanAttack())
         {
-            if (Input.GetAxis("Fire1") != 0 && axisInUse == false && GetComponent<movementplayer>().isGrounded)
-            {
-                if (attackCooldown <= 0f)
-                {
-                    axisInUse = true;
-                    animator.SetTrigger("Attacking");
-                    if (equippedWeapon != null)
-                    {
-                        equippedWeapon.Swish();
-                    }
-                    RaycastSingle();
-                    attackCooldown = 1.5f;
-                }
-            }
-            if(Input.GetAxis("Fire3") != 0 && cooldown <= 0)
-            {
-                if(fireball!=null)
-                {
-                    Vector3 forward = cam.camTransform.rotation.eulerAngles;
-                    forward.x = forward.x-10;
-                    Instantiate(fireball, transform.position+transform.forward,Quaternion.Euler(forward));
-                    animator.SetTrigger("Spell");
-                }
-                cooldown = 3f;
-            }
+            Attack();
         }
         if (Input.GetAxis("Fire1") == 0)
         {
             axisInUse = false;
         }
         
+    }
+
+    void Attack()
+    {
+        if (Input.GetAxis("Fire1") != 0 && axisInUse == false && GetComponent<movementplayer>().isGrounded)
+        {
+            SwordAttack();
+        }
+        if (Input.GetAxis("Fire3") != 0 && cooldown <= 0)
+        {
+            SpellAttack();
+        }
+    }
+
+    void SwordAttack()
+    {
+        if (attackCooldown <= 0f)
+        {
+            axisInUse = true;
+            animator.SetTrigger("Attacking");
+            if (equippedWeapon != null)
+            {
+                equippedWeapon.Swish();
+            }
+            RaycastSingle();
+            attackCooldown = 1.5f;
+        }
+    }
+
+    void SpellAttack()
+    {
+        if (fireball != null)
+        {
+            Vector3 forward = cam.camTransform.rotation.eulerAngles;
+            forward.x = forward.x - 10;
+            Instantiate(fireball, transform.position + transform.forward, Quaternion.Euler(forward));
+            animator.SetTrigger("Spell");
+        }
+        cooldown = 3f;
     }
 
     private static bool CanAttack()

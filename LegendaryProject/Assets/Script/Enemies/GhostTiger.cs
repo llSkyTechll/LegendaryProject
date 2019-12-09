@@ -66,36 +66,51 @@ public class GhostTiger : EnemyAI
         }
         else
         {
-            float distance = Vector3.Distance(target.position, transform.position);
-
-            if (distance <= lookRadius && distance > agent.stoppingDistance)
-            {
-                agent.SetDestination(target.position);
-                if (attackCooldown <= 0f && agent.velocity.magnitude != 0)
-                {
-                    animator.Play(animationRunName);
-
-                }
-
-                FaceTarget();
-            }
-            else if (distance <= agent.stoppingDistance)
-            {
-                if (attackCooldown <= 0f)
-                {
-                    animator.Play(animationAttackName);
-                    DealDamage(10);
-                    PlaySound(attackSound);
-                    attackCooldown = 2f / attackSpeed;
-                }
-                FaceTarget();
-            }
-            else if (distance > lookRadius && (agent.velocity.magnitude) == 0)
-            {
-                animator.Play(animationIdleName);
-                PlayRepeatingSound(idleSound);
-            }
+            BeAlive();
         }
+    }
+
+    void BeAlive()
+    {
+        float distance = Vector3.Distance(target.position, transform.position);
+
+        if (distance <= lookRadius && distance > agent.stoppingDistance)
+        {
+            GoToPlayer();
+        }
+        else if (distance <= agent.stoppingDistance)
+        {
+            AttackPlayer();
+        }
+        else if (distance > lookRadius && (agent.velocity.magnitude) == 0)
+        {
+            animator.Play(animationIdleName);
+            PlayRepeatingSound(idleSound);
+        }
+    }
+
+    void GoToPlayer()
+    {
+        agent.SetDestination(target.position);
+        if (attackCooldown <= 0f && agent.velocity.magnitude != 0)
+        {
+            animator.Play(animationRunName);
+
+        }
+
+        FaceTarget();
+    }
+
+    void AttackPlayer()
+    {
+        if (attackCooldown <= 0f)
+        {
+            animator.Play(animationAttackName);
+            DealDamage(10);
+            PlaySound(attackSound);
+            attackCooldown = 2f / attackSpeed;
+        }
+        FaceTarget();
     }
 
     private void Remove()
